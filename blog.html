@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32">
+<link rel="icon" href="assets/favicon-64.png" sizes="64x64">
+<link rel="shortcut icon" href="d/favicon.ico" type="image/x-icon">
+ 
+
+<title>Blog — DarkVoice</title>
+
+<!-- FUTURISTIC STYLE -->
+<style>
+/* ---------------------- */
+/* FUTURISTIC THEME SETUP */
+/* ---------------------- */
+
+:root {
+  --bg: #f4f5f7;
+  --card: #ffffffcc;
+  --text: #111;
+  --accent: #00aaff;
+  --nav-bg: #ffffffaa;
+}
+
+body.dark {
+  --bg: #0e0e11;
+  --card: #1a1a22cc;
+  --text: #ffffff;
+  --accent: #00d0ff;
+  --nav-bg: #1a1a22aa;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: 0.35s ease;
+}
+
+.site {
+  max-width: 1150px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* ---------------------- */
+/* HEADER + BRAND         */
+/* ---------------------- */
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--nav-bg);
+  padding: 15px 20px;
+  border-radius: 18px;
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--accent);
+  margin-bottom: 20px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.brand img {
+  width: 60px;
+  height: 60px;
+}
+
+.brand h1 {
+  font-size: 1.7rem;
+  margin-bottom: 2px;
+}
+
+.small {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+/* ---------------------- */
+/* THEME TOGGLE BUTTON    */
+/* ---------------------- */
+
+.theme-btn {
+  background: transparent;
+  border: 2px solid var(--accent);
+  padding: 6px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: 0.3s;
+  color: var(--text);
+  margin-right: 20px;
+}
+
+.theme-btn:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* ---------------------- */
+/* NAVIGATION             */
+/* ---------------------- */
+
+nav {
+  display: flex;
+  gap: 12px;
+}
+
+nav a {
+  padding: 8px 14px;
+  text-decoration: none;
+  color: var(--text);
+  border-radius: 10px;
+  transition: 0.25s;
+  border: 1px solid transparent;
+}
+
+nav a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ---------------------- */
+/* MAIN CARD              */
+/* ---------------------- */
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--accent);
+  padding: 25px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  margin-bottom: 20px;
+  transition: 0.35s;
+  box-shadow: 0 0 15px #00000015;
+}
+
+h2 {
+  margin-bottom: 8px;
+}
+
+/* ---------------------- */
+/* FOOTER                 */
+/* ---------------------- */
+
+.footer {
+  text-align: center;
+  opacity: 0.8;
+  margin-top: 25px;
+}
+</style>
+
+<!-- ICONS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+<body>
+
+<div class="site">
+
+<header>
+
+  <div class="brand">
+    <div class="logo"><img src="assets/YP.png" alt="DarkVoice logo"></div>
+    <div>
+      <h1>DarkVoice</h1>
+      <div class="small">The Best Voice Chat in Roblox</div>
+    </div>
+  </div>
+
+  <button id="themeToggle" class="theme-btn">
+    <i class="fa-solid fa-sun"></i>
+  </button>
+
+  <nav id="navMenu">
+    <a class="link" href="index.html">🛖 Home</a>
+    <a class="link" href="shop.html">🛒 Shop</a>
+    <a class="link" href="blog.html">📰 Blog</a>
+    <a class="link" href="stats.html">📃 Statistics</a>
+    <a class="link" href="about.html">📚 About Server</a>
+    <a class="link" href="servers.html">🖥️ Servers</a>
+    <a class="link" href="adminteam.html">👥 Admin Team</a>
+    <a class="link" href="admin.html">⚙️ Admin</a>
+  </nav>
+
+</header>
+
+<main>
+
+<section class="card">
+  <h2>Blog</h2>
+  <p class="small">News & announcements.</p>
+</section>
+
+</main>
+
+<footer class="footer">
+  <small>© <span data-year></span> DarkVoice — All rights reserved</small>
+</footer>
+
+</div>
+
+<!-- JS -->
+<script>
+document.querySelectorAll("[data-year]").forEach(el => {
+  el.textContent = new Date().getFullYear();
+});
+
+// Theme button
+const btn = document.getElementById("themeToggle");
+
+btn.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+
+  btn.innerHTML = document.body.classList.contains("dark")
+    ? '<i class="fa-solid fa-moon"></i>'
+    : '<i class="fa-solid fa-sun"></i>';
+});
+</script>
+
+</body>
+</html>

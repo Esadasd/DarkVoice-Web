@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin Team — DarkVoice</title>
+
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32">
+<link rel="icon" href="assets/favicon-64.png" sizes="64x64">
+<link rel="shortcut icon" href="d/favicon.ico" type="image/x-icon">
+ 
+<style>
+    body {
+        background:#0d0d0d;
+        color:white;
+        font-family:Arial, sans-serif;
+        margin:0;
+    }
+    header {
+        padding:20px;
+        background:#141414;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        border-bottom:2px solid #1f1f1f;
+    }
+    .brand { display:flex; gap:15px; align-items:center; }
+    nav a { margin-left:10px; color:#bfbfbf; text-decoration:none; transition:0.3s; }
+    nav a:hover { color:white; }
+    nav a.active { color:#fff; font-weight:bold; }
+
+    .card {
+        background:#151515;
+        padding:20px;
+        border-radius:14px;
+        margin:20px;
+        border:1px solid #262626;
+    }
+
+    #buttonBar {
+        display:flex;
+        gap:10px;
+        margin:10px 20px 0 20px;
+    }
+    button {
+        background:#222;
+        color:white;
+        border:none;
+        padding:10px 16px;
+        border-radius:10px;
+        cursor:pointer;
+        font-size:14px;
+        transition:0.3s;
+    }
+    button:hover { background:#333; }
+
+    /* GRID MODE */
+    .grid {
+        display:grid;
+        grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+        gap:20px;
+        margin-top:20px;
+    }
+
+    /* LIST MODE */
+    .list {
+        display:block;
+    }
+    .list .adminCard {
+        margin-bottom:15px;
+    }
+
+    /* admin card */
+    .adminCard {
+        background:#1a1a1a;
+        padding:15px;
+        border-radius:12px;
+        border:1px solid #2a2a2a;
+        display:flex;
+        gap:15px;
+        align-items:center;
+        transition:0.3s;
+    }
+    .adminCard:hover {
+        background:#202020;
+    }
+    .adminCard img {
+        border-radius:10px;
+        width:70px;
+        height:70px;
+        object-fit:cover;
+    }
+    .small { color:#9c9c9c; font-size:13px; }
+</style>
+
+</head>
+<body>
+
+<header>
+    <div class="brand">
+        <img src="assets/DK.png" width="50">
+        <div>
+            <h2>DarkVoice</h2>
+            <div class="small">The best voice chat in Roblox</div>
+        </div>
+    </div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="adminteam.html" class="active">Admin Team</a>
+    </nav>
+</header>
+
+<div id="buttonBar">
+    <button id="toggleViewBtn">🔳 Switch to List</button>
+    <button id="reloadBtn">🔄 Reload Avatars</button>
+</div>
+
+<section class="card">
+  <h2>Admin Team</h2>
+  <p class="small">Automatically loading avatars through the Roblox API.</p>
+  <div id="adminGrid" class="grid"></div>
+</section>
+
+<script>
+/* ---- CONFIG ---- */
+const adminUsernames = [
+  "VoidSpecter","tvojahellokitty","Mia","klaudia","v4nxskq","StaffSup",
+  "AdminUser","HeadMod","ModUser","TrialMod","HeadEvent","Eventer1","Tester","Creator"
+];
+const usernameToRank = {
+    "VoidSpecter":"Holder","tvojahellokitty":"Founder","Mia":"Founder","klaudia":"Manager","CommunityLead":"Community Manager",
+    "HeadStaff":"Head of Staff","StaffSup":"Staff Supervisor","v4nxskq":"Administrator",
+    "HeadMod":"Head Moderator","ModUser":"Moderator","TrialMod":"Trial Moderator",
+    "HeadEvent":"Head Eventer","Eventer1":"Eventer","Tester":"Tester","Creator":"Content Creator"
+};
+const placeholder = "assets/DK.png";
+const usernameLookupUrl = "https://users.roblox.com/v1/usernames/users";
+const thumbnailApiBase = "https://thumbnails.roblox.com/v1/users/avatar-headshot";
+
+/* RENDER CARD */
+function createCard(username, rank, avatar, profileUrl) {
+    const div = document.createElement("div");
+    div.className = "adminCard";
+    div.innerHTML = `
+        <img src="${avatar}">
+        <div>
+            <strong>${username}</strong><br>
+            <span class="small">Rank: ${rank}</span><br>
+            <a href="${profileUrl}" target="_blank" class="small" style="color:#7dc9ff">Roblox Profile</a>
+        </div>
+    `;
+    return div;
+}
+
+/* LOAD AVATARS */
+async function loadAdmins() {
+    const adminGrid = document.getElementById("adminGrid");
+    adminGrid.innerHTML = ""; // clear
+
+    for (const uname of adminUsernames) {
+        const placeholderCard = createCard(uname, usernameToRank[uname], placeholder, "#");
+        adminGrid.appendChild(placeholderCard);
+
+        try {
+            const res = await fetch(usernameLookupUrl, {
+                method:"POST",
+                headers:{"Content-Type":"application/json"},
+                body:JSON.stringify({usernames:[uname], excludeBannedUsers:true})
+            });
+            const data = await res.json();
+            const user = data.data?.[0];
+            if (!user) continue;
+
+            const id = user.id;
+            const profile = `https://www.roblox.com/users/${id}/profile`;
+
+            const thumb = await fetch(`${thumbnailApiBase}?userIds=${id}&size=150&format=png`);
+            const tJson = await thumb.json();
+            const avatar = tJson.data?.[0]?.imageUrl || placeholder;
+
+            const real = createCard(uname, usernameToRank[uname], avatar, profile);
+            adminGrid.replaceChild(real, placeholderCard);
+        } catch (e) {
+            console.warn("Error:", uname, e);
+        }
+    }
+}
+
+/* ---- VIEW MODE TOGGLE ---- */
+let gridMode = true;
+document.getElementById("toggleViewBtn").onclick = () => {
+    const adminGrid = document.getElementById("adminGrid");
+    gridMode = !gridMode;
+
+    if (gridMode) {
+        adminGrid.className = "grid";
+        toggleViewBtn.textContent = "🔳 Switch to List";
+    } else {
+        adminGrid.className = "list";
+        toggleViewBtn.textContent = "📄 Switch to Grid";
+    }
+};
+
+/* ---- RELOAD BUTTON ---- */
+document.getElementById("reloadBtn").onclick = loadAdmins;
+
+/* INITIAL LOAD */
+loadAdmins();
+</script>
+
+</body>
+</html>

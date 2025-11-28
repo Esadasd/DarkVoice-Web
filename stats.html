@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Statistics — DarkVoice</title>
+
+<!-- Futuristic Font -->
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32">
+<link rel="icon" href="assets/favicon-64.png" sizes="64x64">
+<link rel="shortcut icon" href="d/favicon.ico" type="image/x-icon">
+ 
+
+<style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Oxanium', sans-serif;
+      transition: background 0.25s, color 0.25s, box-shadow 0.25s;
+    }
+
+    :root {
+      --bg: #f5f6f7;
+      --text: #232323;
+      --card-bg: rgba(255,255,255,0.65);
+      --border: rgba(0,0,0,0.08);
+      --glow: rgba(180, 220, 255, 0.25);
+    }
+
+    body.dark {
+      --bg: #05060a;
+      --text: #eaeaea;
+      --card-bg: rgba(20,24,35,0.7);
+      --border: rgba(255,255,255,0.12);
+      --glow: #009dff33;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* HEADER */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: rgba(255,255,255,0.4);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 4px 18px var(--glow);
+    }
+    body.dark header {
+      background: rgba(15,17,25,0.65);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .brand img {
+      height: 60px;
+      filter: drop-shadow(0 0 6px #7acbff);
+    }
+
+    nav {
+      display: flex;
+      gap: 18px;
+    }
+
+    nav .link {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 16px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: .2s;
+    }
+
+    nav .link:hover {
+      background: rgba(180,180,180,0.15);
+      box-shadow: 0 0 10px #b3e4ff;
+    }
+
+    /* THEME TOGGLE BUTTON */
+    #themeToggle {
+      padding: 8px 14px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #7ad3ff;
+      color: #000;
+      box-shadow: 0 0 10px #c2ecff;
+      transition: 0.2s;
+    }
+
+    body.dark #themeToggle {
+      background: #0e1320;
+      color: #fff;
+      box-shadow: 0 0 10px #009dff;
+    }
+
+    /* MAIN CARD */
+    .card {
+      max-width: 900px;
+      margin: 100px auto;
+      padding: 40px;
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 0 30px var(--glow);
+      animation: fadeIn 1.4s ease;
+      text-align: center;
+    }
+
+    .card h2 {
+      font-size: 34px;
+      margin-bottom: 20px;
+    }
+
+    .statsLine {
+      font-size: 18px;
+      margin: 10px 0;
+      color: var(--text);
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      margin-top: 60px;
+      background: rgba(0,0,0,0.05);
+      font-size: 14px;
+      border-top: 1px solid var(--border);
+    }
+    body.dark footer {
+      background: #0c1018;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <img src="assets/DK.png" alt="DarkVoice Logo">
+    <div>
+      <h1>DarkVoice</h1>
+      <div class="small">The best voice chat on Roblox</div>
+    </div>
+  </div>
+
+  <nav id="navMenu">
+    <a class="link" href="index.html">🛖 Home</a>
+    <a class="link" href="shop.html">🛒 Shop</a>
+    <a class="link" href="blog.html">📰 Blog</a>
+    <a class="link" href="stats.html">📃 Statistics</a>
+    <a class="link" href="about.html">📚 About</a>
+    <a class="link" href="servers.html">🖥️ Servers</a>
+    <a class="link" href="adminteam.html">👥 Admin Team</a>
+    <a class="link" href="admin.html">⚙️ Admin</a>
+  </nav>
+
+  <button id="themeToggle">🌙 Dark</button>
+</header>
+
+<main>
+<section class="card">
+  <h2>Statistics</h2>
+
+  <p class="statsLine"><strong>Active Players:</strong> <span id="activePlayers">Loading...</span></p>
+  <p class="statsLine"><strong>Total Visits:</strong> <span id="visits">Loading...</span></p>
+  <p class="statsLine"><strong>Favorites:</strong> <span id="favorites">Loading...</span></p>
+
+</section>
+</main>
+
+<footer>
+  <small>© <span data-year></span> DarkVoice — All rights reserved</small>
+</footer>
+
+<script>
+// Auto year
+document.querySelector('[data-year]').textContent = new Date().getFullYear();
+
+// THEME SYSTEM
+const toggle = document.getElementById("themeToggle");
+const body = document.body;
+
+if(localStorage.getItem("theme") === "dark") {
+    body.classList.add("dark");
+    toggle.textContent = "☀️ Light";
+}
+
+toggle.addEventListener("click", () => {
+    body.classList.toggle("dark");
+
+    if(body.classList.contains("dark")) {
+        localStorage.setItem("theme", "dark");
+        toggle.textContent = "☀️ Light";
+    } else {
+        localStorage.setItem("theme", "light");
+        toggle.textContent = "🌙 Dark";
+    }
+});
+
+// Roblox Stats
+const gameId = 96059691980081;
+
+async function updateStats() {
+  try {
+    const response = await fetch(`https://games.roblox.com/v1/games?universeIds=${gameId}`);
+    const data = await response.json();
+    const info = data.data[0];
+
+    document.getElementById('activePlayers').textContent = info.playing.toLocaleString('en-US');
+    document.getElementById('visits').textContent = info.visits.toLocaleString('en-US');
+    document.getElementById('favorites').textContent = info.favoritedCount.toLocaleString('en-US');
+  } catch (error) {
+    document.getElementById('activePlayers').textContent = 'Error';
+    document.getElementById('visits').textContent = 'Error';
+    document.getElementById('favorites').textContent = 'Error';
+  }
+}
+
+updateStats();
+setInterval(updateStats, 5 * 60 * 1000);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Home — DarkVoice</title>
+
+<!-- Futuristic Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32">
+<link rel="icon" href="assets/favicon-64.png" sizes="64x64">
+<link rel="shortcut icon" href="d/favicon.ico" type="image/x-icon">
+ 
+<style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Oxanium', sans-serif;
+      transition: background 0.25s, color 0.25s, box-shadow 0.25s;
+    }
+
+    :root {
+      --bg: #f5f6f7;
+      --text: #232323;
+      --card-bg: rgba(255,255,255,0.65);
+      --border: rgba(0,0,0,0.06);
+      --glow: rgba(180, 220, 255, 0.25);
+    }
+
+    body.dark {
+      --bg: #05060a;
+      --text: #eaeaea;
+      --card-bg: rgba(20,24,35,0.7);
+      --border: rgba(255,255,255,0.08);
+      --glow: #009dff33;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* HEADER */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: rgba(255,255,255,0.4);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 4px 18px var(--glow);
+    }
+    body.dark header {
+      background: rgba(15,17,25,0.65);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .brand img {
+      height: 60px;
+      filter: drop-shadow(0 0 6px #7acbff);
+    }
+
+    h1 {
+      font-size: 26px;
+      letter-spacing: 1px;
+      text-shadow: 0 0 8px #b9e9ff;
+    }
+
+    nav {
+      display: flex;
+      gap: 18px;
+    }
+
+    nav .link {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 16px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: 0.2s;
+    }
+
+    nav .link:hover {
+      background: rgba(180,180,180,0.15);
+      box-shadow: 0 0 10px #b3e4ff;
+    }
+
+    /* THEME SWITCH BUTTON */
+    #themeToggle {
+      padding: 8px 14px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #7ad3ff;
+      color: #000;
+      box-shadow: 0 0 10px #c2ecff;
+      transition: 0.2s;
+    }
+
+    body.dark #themeToggle {
+      background: #0e1320;
+      color: #fff;
+      box-shadow: 0 0 10px #009dff;
+    }
+
+    #themeToggle:hover {
+      transform: scale(1.05);
+    }
+
+    /* MAIN CARD */
+    .card {
+      max-width: 900px;
+      margin: 100px auto;
+      padding: 40px;
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 0 30px var(--glow);
+      text-align: center;
+      animation: fadeIn 1.4s ease;
+    }
+
+    .card h2 {
+      font-size: 34px;
+      margin-bottom: 15px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 25px;
+      background: #7ad3ff;
+      color: #000;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 700;
+      box-shadow: 0 0 15px #c2ecff;
+      transition: 0.25s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px #c2ecff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      margin-top: 60px;
+      background: rgba(0,0,0,0.05);
+      font-size: 14px;
+      border-top: 1px solid var(--border);
+    }
+    body.dark footer {
+      background: #0c1018;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <img src="assets/DK.png" alt="">
+    <div>
+      <h1>DarkVoice</h1>
+      <div class="small">The Best Voice Chat on Roblox</div>
+    </div>
+  </div>
+
+  <nav id="navMenu">
+    <a class="link" href="index.html">🛖 Home</a>
+    <a class="link" href="shop.html">🛒 Shop</a>
+    <a class="link" href="blog.html">📰 Blog</a>
+    <a class="link" href="stats.html">📃 Statistics</a>
+    <a class="link" href="about.html">📚 About</a>
+    <a class="link" href="servers.html">🖥️ Servers</a>
+    <a class="link" href="adminteam.html">👥 Admin Team</a>
+    <a class="link" href="admin.html">⚙️ Admin</a>
+  </nav>
+
+  <!-- Theme Toggle Button -->
+  <button id="themeToggle">🌙 Dark</button>
+</header>
+
+<main>
+<section class="card">
+  <h2>Welcome to DarkVoice</h2>
+  <p>Step into a world where words come alive! DarkVoice is an interactive voice chat experience for Roblox.</p>
+  <a class="btn" href="servers.html">Join Now</a>
+</section>
+</main>
+
+<footer>
+  <small>© <span data-year></span> DarkVoice — All Rights Reserved</small>
+</footer>
+
+<!-- AUTO YEAR + THEME LOGIC -->
+<script>
+  document.querySelector("[data-year]").textContent = new Date().getFullYear();
+
+  const toggle = document.getElementById("themeToggle");
+  const body = document.body;
+
+  // Load saved theme
+  if(localStorage.getItem("theme") === "dark") {
+    body.classList.add("dark");
+    toggle.textContent = "☀️ Light";
+  }
+
+  toggle.addEventListener("click", () => {
+    body.classList.toggle("dark");
+
+    if(body.classList.contains("dark")) {
+      localStorage.setItem("theme", "dark");
+      toggle.textContent = "☀️ Light";
+    } else {
+      localStorage.setItem("theme", "light");
+      toggle.textContent = "🌙 Dark";
+    }
+  });
+</script>
+
+</body>
+</html>

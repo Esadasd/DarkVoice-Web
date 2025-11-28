@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>About Server — Yapster CZ/SK</title>
+
+<!-- Futuristic Font -->
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;700&display=swap" rel="stylesheet">
+
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32">
+<link rel="icon" href="assets/favicon-64.png" sizes="64x64">
+<link rel="shortcut icon" href="d/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<style>
+  :root {
+    --bg:#f3f4f7;
+    --text:#1a1a1a;
+    --card:rgba(255,255,255,0.75);
+    --accent:#00aaff;
+    --subtext:rgba(0,0,0,0.7);
+  }
+
+  body.dark {
+    --bg:#05060a;
+    --text:#e9e9e9;
+    --card:rgba(20,24,35,0.75);
+    --accent:#00d0ff;
+    --subtext:rgba(255,255,255,0.7);
+  }
+
+  * { box-sizing:border-box; }
+
+  body {
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Oxanium', sans-serif;
+    transition:background .25s, color .25s;
+  }
+
+  .site {
+    max-width:1100px;
+    margin:20px auto;
+    padding:16px;
+  }
+
+  header {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 18px;
+    background:var(--card);
+    border-radius:14px;
+    backdrop-filter:blur(8px);
+    border:1px solid rgba(0,0,0,0.06);
+    box-shadow:0 8px 25px rgba(0,0,0,0.08);
+  }
+
+  body.dark header {
+    border-color:rgba(255,255,255,0.06);
+  }
+
+  .brand {
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+
+  .logo img {
+    width:56px;
+    height:56px;
+    border-radius:10px;
+    filter:drop-shadow(0 0 10px #66dfff40);
+  }
+
+  .brand h1 {
+    margin:0;
+    font-size:22px;
+  }
+
+  .small {
+    font-size:14px;
+    color:var(--subtext);
+  }
+
+  /* Navigation */
+  nav {
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+
+  nav a {
+    text-decoration:none;
+    padding:8px 12px;
+    border-radius:10px;
+    color:var(--text);
+    transition:.15s;
+  }
+
+  nav a:hover {
+    background:rgba(0,0,0,0.06);
+    color:var(--accent);
+  }
+
+  /* Theme Toggle Button */
+  #themeToggle {
+    padding:8px 12px;
+    background:var(--accent);
+    color:#000;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:700;
+    box-shadow:0 5px 15px rgba(0,167,255,0.15);
+    transition:.2s;
+  }
+
+  #themeToggle:hover {
+    transform:scale(1.06);
+  }
+
+  /* Card */
+  .card {
+    background:var(--card);
+    border-radius:14px;
+    padding:20px;
+    margin-top:18px;
+    backdrop-filter:blur(6px);
+    border:1px solid rgba(0,0,0,0.06);
+    box-shadow:0 10px 30px rgba(0,0,0,0.06);
+  }
+
+  h2 {
+    margin-top:0;
+    font-size:26px;
+  }
+
+  footer {
+    margin-top:20px;
+    text-align:center;
+    color:var(--subtext);
+  }
+
+  @media (max-width:650px) {
+    header {
+      flex-direction:column;
+      text-align:center;
+      gap:12px;
+    }
+    nav {
+      justify-content:center;
+    }
+  }
+</style>
+
+</head>
+<body>
+
+<div class="site">
+
+<header>
+  <div class="brand">
+    <div class="logo">
+      <img src="assets/DK.png" alt="Yapster Studio logo">
+    </div>
+    <div>
+      <h1>DarkVoice</h1>
+      <div class="small">The best voice chat on Roblox</div>
+    </div>
+  </div>
+
+  <nav id="navMenu">
+    <a class="link" href="index.html">🛖 Home</a>
+    <a class="link" href="shop.html">🛒 Shop</a>
+    <a class="link" href="blog.html">📰 Blog</a>
+    <a class="link" href="stats.html">📃 Statistics</a>
+    <a class="link" href="about.html">📚 About Server</a>
+    <a class="link" href="servers.html">🖥️ Servers</a>
+    <a class="link" href="adminteam.html">👥 Admin Team</a>
+    <a class="link" href="admin.html">⚙️ Admin</a>
+  </nav>
+
+  <button id="themeToggle">🌙 Dark</button>
+</header>
+
+<main>
+  <section class="card">
+    <h2>About the Server</h2>
+
+    <p class="small">
+      🎤 DarkVoice — The best voice chat in Roblox!
+    </p>
+
+    <p class="small">
+      <i class="fa-brands fa-discord"></i>
+      Discord: <a href='https://discord.gg/jtjfSgTbGF' target='_blank'>Join our Discord</a>
+    </p>
+  </section>
+</main>
+
+<footer class="footer">
+  <small>© <span data-year></span> DarkVoice — All rights reserved</small>
+</footer>
+
+</div>
+
+<script>
+  // Auto-set year
+  document.querySelectorAll('[data-year]').forEach(el => {
+    el.textContent = new Date().getFullYear();
+  });
+
+  // Theme Toggle
+  const themeBtn = document.getElementById("themeToggle");
+  const body = document.body;
+
+  if (localStorage.getItem("theme") === "dark") {
+    body.classList.add("dark");
+    themeBtn.textContent = "☀️ Light";
+  }
+
+  themeBtn.addEventListener("click", () => {
+    body.classList.toggle("dark");
+    if (body.classList.contains("dark")) {
+      localStorage.setItem("theme", "dark");
+      themeBtn.textContent = "☀️ Light";
+    } else {
+      localStorage.setItem("theme", "light");
+      themeBtn.textContent = "🌙 Dark";
+    }
+  });
+</script>
+
+</body>
+</html>
