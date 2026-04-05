@@ -1,276 +1,231 @@
 <!doctype html>
-<html lang="en">
+<html lang="cs">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Obchod — StormVoice CZ/SK</title>
 
-<title>Shop — DarkVoice</title>
-
-<!-- Futuristic Font -->
-<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;700&display=swap" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
-<link rel="icon" href="assets/favicon-32.png" sizes="32x32">
-<link rel="icon" href="assets/favicon-64.png" sizes="64x64">
-<link rel="shortcut icon" href="d/favicon.ico" type="image/x-icon">
- 
-
 <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Oxanium', sans-serif;
-      transition: background 0.25s, color 0.25s, box-shadow 0.25s;
-    }
-
     :root {
-      --bg: #f5f6f7;
-      --text: #232323;
-      --card-bg: rgba(255,255,255,0.65);
-      --border: rgba(0,0,0,0.08);
-      --glow: rgba(0, 150, 255, 0.25);
-      --btn: #00aaff;
+      --bg: #f8fafc;
+      --text: #0f172a;
+      --accent: #2563eb;
+      --accent-glow: rgba(37, 99, 235, 0.15);
+      --card-bg: rgba(255, 255, 255, 0.75);
+      --border: rgba(0, 0, 0, 0.08);
+      --nav-bg: rgba(255, 255, 255, 0.85);
     }
 
     body.dark {
-      --bg: #05060a;
-      --text: #eaeaea;
-      --card-bg: rgba(15,18,28,0.7);
-      --border: rgba(255,255,255,0.12);
-      --glow: #009dff55;
-      --btn: #009dff;
+      --bg: #020617;
+      --text: #f1f5f9;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.2);
+      --card-bg: rgba(15, 23, 42, 0.75);
+      --border: rgba(255, 255, 255, 0.08);
+      --nav-bg: rgba(15, 23, 42, 0.9);
     }
 
+    * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.3s ease; }
+    
     body {
       background: var(--bg);
       color: var(--text);
-      overflow-x: hidden;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
     }
 
-    /* HEADER */
+    h1, h2, h3, .brand-name, .btn { font-family: 'Oxanium', sans-serif; }
+
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 40px;
-      background: rgba(255,255,255,0.4);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      box-shadow: 0 4px 18px var(--glow);
-    }
-    body.dark header {
-      background: rgba(15,17,25,0.6);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 5%; background: var(--nav-bg); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand img { height: 45px; filter: drop-shadow(0 0 8px var(--accent)); border-radius: 8px; }
+    .brand-name { font-size: 1.3rem; font-weight: 700; background: linear-gradient(90deg, var(--text), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-    .brand img {
-      height: 60px;
-      filter: drop-shadow(0 0 6px #7acbff);
-    }
+    nav { display: flex; gap: 10px; }
+    nav a { color: var(--text); text-decoration: none; font-size: 0.9rem; padding: 8px 15px; border-radius: 8px; font-weight: 500; }
+    nav a:hover { background: var(--border); color: var(--accent); }
+    nav a.active { color: var(--accent); background: var(--accent-glow); }
 
-    nav {
-      display: flex;
-      gap: 18px;
-    }
+    .container { max-width: 1100px; margin: 60px auto; padding: 0 20px; }
 
-    nav .link {
-      color: var(--text);
-      text-decoration: none;
-      font-size: 16px;
-      padding: 8px 14px;
-      border-radius: 8px;
-      transition: .2s;
-    }
+    .shop-header { text-align: center; margin-bottom: 50px; }
+    .shop-header h2 { font-size: 2.5rem; margin-bottom: 10px; }
+    .shop-header p { opacity: 0.7; }
 
-    nav .link:hover {
-      background: rgba(180,180,180,0.15);
-      box-shadow: 0 0 10px #b3e4ff;
-    }
-
-    /* THEME TOGGLE BUTTON */
-    #themeToggle {
-      padding: 8px 14px;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      background: #7ad3ff;
-      color: #000;
-      box-shadow: 0 0 10px #c2ecff;
-      transition: 0.2s;
-    }
-
-    body.dark #themeToggle {
-      background: #0e1320;
-      color: #fff;
-      box-shadow: 0 0 10px #009dff;
-    }
-
-    /* MAIN CARD */
-    .card {
-      max-width: 900px;
-      margin: 50px auto;
-      padding: 40px;
-      background: var(--card-bg);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      box-shadow: 0 0 30px var(--glow);
-      animation: fadeIn 1.4s ease;
-      text-align: center;
-    }
-
-    .grid {
+    /* GRID SYSTÉM */
+    .shop-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-      margin-top: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
     }
 
-    .card h2 {
-      font-size: 34px;
-      margin-bottom: 20px;
-    }
-
-    .small {
-      font-size: 15px;
-      opacity: .8;
-    }
-
-    /* FUTURISTIC BUTTON */
-    .btn {
-      display: inline-block;
-      margin-top: 14px;
-      padding: 12px 22px;
-      background: var(--btn);
-      color: #fff;
-      border-radius: 10px;
-      text-decoration: none;
-      font-size: 17px;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 0 16px var(--btn);
-      transition: 0.25s;
-    }
-
-    .btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 25px var(--btn), 0 0 50px var(--btn);
-    }
-
-    footer {
-      text-align: center;
+    /* KARTA PRODUKTU */
+    .item-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 24px;
       padding: 25px;
-      margin-top: 60px;
-      background: rgba(0,0,0,0.05);
-      font-size: 14px;
-      border-top: 1px solid var(--border);
-    }
-    body.dark footer {
-      background: #0c1018;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .item-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--accent);
+      box-shadow: 0 20px 40px var(--accent-glow);
+    }
+
+    .item-icon {
+      width: 120px;
+      height: 120px;
+      background: var(--bg);
+      border-radius: 20px;
+      margin-bottom: 20px;
+      object-fit: cover;
+      border: 2px solid var(--border);
+    }
+
+    .item-title { font-size: 1.5rem; margin-bottom: 10px; }
+    .item-desc { font-size: 0.9rem; opacity: 0.7; margin-bottom: 20px; min-height: 40px; }
+    
+    .price-tag {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      color: #fbbf24; /* Roblox Gold */
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      box-shadow: 0 10px 20px var(--accent-glow);
+    }
+
+    .btn:hover { filter: brightness(1.2); box-shadow: 0 15px 30px var(--accent-glow); }
+
+    #themeToggle {
+      background: transparent; border: 1px solid var(--border); color: var(--text);
+      padding: 8px 15px; border-radius: 20px; cursor: pointer;
+    }
+
+    footer { text-align: center; padding: 40px; opacity: 0.6; font-size: 0.85rem; border-top: 1px solid var(--border); }
+
+    @media (max-width: 768px) {
+      header { flex-direction: column; gap: 15px; }
+      nav { flex-wrap: wrap; justify-content: center; }
     }
 </style>
-
 </head>
 <body>
 
 <header>
   <div class="brand">
-    <img src="assets/DK.png" alt="DarkVoice logo">
+    <img src="assets/DK.png" alt="SV">
     <div>
-      <h1>DarkVoice</h1>
-      <div class="small">The Best Voice Chat in Roblox</div>
+      <div class="brand-name">STORMVOICE</div>
+      <div style="font-size: 10px; letter-spacing: 1px; opacity: 0.7; font-weight: 700;">STORE</div>
     </div>
   </div>
 
-  <nav id="navMenu">
-    <a class="link" href="index.html">🛖 Home</a>
-    <a class="link" href="shop.html">🛒 Shop</a>
-    <a class="link" href="blog.html">📰 Blog</a>
-    <a class="link" href="stats.html">📃 Statistics</a>
-    <a class="link" href="about.html">📚 About Server</a>
-    <a class="link" href="servers.html">🖥️ Servers</a>
-    <a class="link" href="adminteam.html">👥 Admin Team</a>
-    <a class="link" href="admin.html">⚙️ Admin</a>
+  <nav>
+    <a href="index.html">Domů</a>
+    <a href="shop.html" class="active">Obchod</a>
+    <a href="blog.html">Oznámení</a>
+    <a href="servers.html">Servery</a>
+    <a href="adminteam.html">Tým</a>
   </nav>
 
-  <button id="themeToggle">🌙 Dark</button>
+  <button id="themeToggle"><i class="fa-solid fa-moon"></i></button>
 </header>
 
-<main>
+<div class="container">
+  <section class="shop-header">
+    <h2>Vylepši svůj zážitek</h2>
+    <p>Podpoř StormVoice a získej exkluzivní výhody přímo na serverech.</p>
+  </section>
 
-<section class="card">
-  <h2>Shop</h2>
-
-  <p class="small">Gamepasses</p>
-
-  <div class="grid">
-
-    <div class="card">
-      <h3>VIP</h3>
-      <p class="small">Basic VIP Role</p>
-      <p><strong>Price:</strong> 50 Robux</p>
-      <a class="btn" href="https://www.roblox.com/game-pass/1531085094/VIP" target="_blank">
-        Buy Through Roblox
-      </a>
+  <div class="shop-grid">
+    <!-- VIP GAMEPASS -->
+    <div class="item-card">
+      <img src="https://www.roblox.com/game-pass/1531085094/icon-render" class="item-icon" alt="VIP">
+      <h3 class="item-title">VIP Role</h3>
+      <p class="item-desc">Základní přístup k VIP příkazům a speciálnímu označení v chatu.</p>
+      <div class="price-tag">
+        <img src="https://tr.rbxcdn.com/712392751962514106/150/150/Image/Png" width="20" alt="Robux">
+        50
+      </div>
+      <a href="https://www.roblox.com/game-pass/1531085094/VIP" target="_blank" class="btn">KOUPIT NA ROBLOXU</a>
     </div>
 
-    <div class="card">
-      <h3>Premium</h3>
-      <p class="small">Premium Role</p>
-      <p><strong>Price:</strong> 120 Robux</p>
-      <a class="btn" href="https://www.roblox.com/game-pass/1590543385/VIP" target="_blank">
-        Buy Through Roblox
-      </a>
+    <!-- PREMIUM GAMEPASS -->
+    <div class="item-card">
+      <img src="https://www.roblox.com/game-pass/1590543385/icon-render" class="item-icon" alt="Premium">
+      <h3 class="item-title">Premium Role</h3>
+      <p class="item-desc">Maximální výhody, přístup do exkluzivních místností a unikátní efekty.</p>
+      <div class="price-tag">
+        <img src="https://tr.rbxcdn.com/712392751962514106/150/150/Image/Png" width="20" alt="Robux">
+        120
+      </div>
+      <a href="https://www.roblox.com/game-pass/1590543385/VIP" target="_blank" class="btn">KOUPIT NA ROBLOXU</a>
     </div>
-
   </div>
-</section>
+</div>
 
-</main>
-
-<footer class="footer">
-  <small>© <span data-year></span> DarkVoice — All rights reserved</small>
+<footer>
+  <small>© <span id="year"></span> StormVoice CZ/SK — All purchases are final and handled via Roblox.</small>
 </footer>
 
 <script>
-// Auto Year
-document.querySelector("[data-year]").textContent = new Date().getFullYear();
+  // Dynamické načítání ikon z Robloxu
+  // Používáme Thumbnails API přes Roblox proxy/render linky
+  document.querySelectorAll('.item-card').forEach(card => {
+    const link = card.querySelector('.btn').href;
+    const passId = link.match(/game-pass\/(\d+)/)[1];
+    const iconImg = card.querySelector('.item-icon');
+    
+    // Oficiální Roblox Thumbnail API URL pro Gamepassy
+    iconImg.src = `https://www.roblox.com/game-pass/${passId}/icon-render?width=150&height=150&format=png`;
+  });
 
-// THEME SYSTEM
-const toggle = document.getElementById("themeToggle");
-const body = document.body;
+  // Základní logika
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-if(localStorage.getItem("theme") === "dark") {
-    body.classList.add("dark");
-    toggle.textContent = "☀️ Light";
-}
+  const tBtn = document.getElementById('themeToggle');
+  tBtn.onclick = () => {
+    document.body.classList.toggle('dark');
+    const isDark = document.body.classList.contains('dark');
+    tBtn.innerHTML = isDark ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+    localStorage.setItem('sv_theme', isDark ? 'dark' : 'light');
+  };
 
-toggle.addEventListener("click", () => {
-    body.classList.toggle("dark");
-
-    if(body.classList.contains("dark")) {
-        localStorage.setItem("theme", "dark");
-        toggle.textContent = "☀️ Light";
-    } else {
-        localStorage.setItem("theme", "light");
-        toggle.textContent = "🌙 Dark";
-    }
-});
+  if(localStorage.getItem('sv_theme') === 'dark') {
+    document.body.classList.add('dark');
+    tBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
+  }
 </script>
 
 </body>
