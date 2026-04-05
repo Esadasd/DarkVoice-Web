@@ -31,7 +31,7 @@
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; transition: background 0.3s, color 0.3s; }
-    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; }
     h1, h2, h3, .brand-name { font-family: 'Oxanium', sans-serif; }
 
     header {
@@ -54,42 +54,44 @@
 
     .main-content .card {
       background: var(--card-bg); border: 1px solid var(--border); border-radius: 24px;
-      padding: 30px; backdrop-filter: blur(15px); min-height: 400px;
+      padding: 30px; backdrop-filter: blur(15px); min-height: 500px;
     }
 
-    .feed-header { display: flex; align-items: center; gap: 10px; margin-bottom: 25px; }
+    .feed-header { display: flex; align-items: center; gap: 10px; margin-bottom: 25px; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
     .live-dot { width: 10px; height: 10px; background: #10b981; border-radius: 50%; animation: pulse 2s infinite; }
-    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+    @keyframes pulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(1.2); } 100% { opacity: 1; transform: scale(1); } }
 
     .announcement-box {
       background: rgba(88, 101, 242, 0.05); border: 1px solid var(--border);
       border-radius: 16px; padding: 20px; margin-bottom: 20px; position: relative;
-      animation: fadeIn 0.5s ease-out;
+      animation: slideIn 0.4s ease-out forwards;
     }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes slideIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
 
     .announcement-box::before {
-      content: "DISCORD FEED"; position: absolute; top: -10px; right: 20px;
+      content: "STORM FEED"; position: absolute; top: -10px; right: 20px;
       background: var(--discord); color: white; font-size: 10px; font-weight: 800;
-      padding: 2px 8px; border-radius: 4px; font-family: 'Oxanium';
+      padding: 2px 10px; border-radius: 20px; font-family: 'Oxanium';
     }
 
     .discord-widget-container { position: sticky; top: 100px; }
     .widget-info {
-        background: var(--discord); color: white; padding: 20px;
+        background: var(--discord); color: white; padding: 25px;
         border-radius: 24px 24px 0 0; text-align: center;
     }
 
-    iframe { border-radius: 0 0 24px 24px; border: 1px solid var(--border); background: #2f3136; }
+    iframe { border-radius: 0 0 24px 24px; border: 1px solid var(--border); background: #2f3136; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
 
     .btn-join {
-        display: block; width: 100%; padding: 15px; background: var(--discord);
-        color: white; text-decoration: none; border-radius: 12px;
+        display: block; width: 100%; padding: 16px; background: var(--discord);
+        color: white; text-decoration: none; border-radius: 15px;
         text-align: center; font-weight: 700; font-family: 'Oxanium';
-        margin-top: 15px; box-shadow: 0 10px 20px rgba(88, 101, 242, 0.2);
+        margin-top: 20px; box-shadow: 0 10px 25px rgba(88, 101, 242, 0.3);
+        transition: 0.3s;
     }
+    .btn-join:hover { transform: translateY(-3px); filter: brightness(1.1); }
 
-    .empty-msg { text-align: center; opacity: 0.5; padding: 50px 0; }
+    .empty-msg { text-align: center; opacity: 0.5; padding: 100px 0; font-style: italic; }
 
     @media (max-width: 950px) {
       .container { grid-template-columns: 1fr; }
@@ -107,8 +109,8 @@
   <nav>
     <a href="index.html">Domů</a>
     <a href="blog.html" class="active">Oznámení</a>
+    <a href="shop.html">Obchod</a>
     <a href="adminteam.html">Tým</a>
-    <a href="admin.html">Admin</a>
   </nav>
   <button id="themeToggle" style="background:transparent; border:1px solid var(--border); color:var(--text); padding:8px 15px; border-radius:20px; cursor:pointer;">
     <i class="fa-solid fa-moon"></i>
@@ -120,36 +122,38 @@
     <div class="card">
       <div class="feed-header">
         <div class="live-dot"></div>
-        <h2 style="font-family: 'Oxanium';">Live Oznámení</h2>
-        <span style="font-size: 0.7rem; opacity: 0.4; margin-left: auto;" id="syncTime">Sync: aktivní</span>
+        <h2 style="font-family: 'Oxanium'; font-size: 1.5rem;">Live Sync Oznámení</h2>
+        <span style="font-size: 0.7rem; opacity: 0.5; margin-left: auto; letter-spacing: 1px;" id="syncTime">Čekám na data...</span>
       </div>
 
-      <!-- SEM SE BUDOU SYPAT ZPRÁVY Z DISCORDU -->
       <div id="announcements">
-        <div class="empty-msg">Čekám na zprávy z Discordu...</div>
+        <div class="empty-msg">Navazuji spojení se serverem...</div>
       </div>
     </div>
   </main>
 
   <aside class="discord-widget-container">
     <div class="widget-info">
-        <i class="fa-brands fa-discord" style="font-size: 2.5rem; margin-bottom: 10px;"></i>
+        <i class="fa-brands fa-discord" style="font-size: 3rem; margin-bottom: 12px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.2));"></i>
         <h3 style="font-family: 'Oxanium';">StormVoice Discord</h3>
-        <p style="font-size: 0.8rem; opacity: 0.9;">Právě online: <span id="onlineCount">--</span></p>
+        <p style="font-size: 0.85rem; opacity: 0.9; margin-top: 5px;">Online: <span id="onlineCount" style="font-weight: 700;">--</span></p>
     </div>
     
-    <iframe src="https://discord.com/widget?id=1433583582567338060&theme=dark" width="100%" height="450" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+    <!-- DISCORD WIDGET - Propojeno s tvým serverem -->
+    <iframe src="https://discord.com/widget?id=1433583582567338060&theme=dark" width="100%" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
 
-    <a href="https://discord.gg/jtjfSgTbGF" target="_blank" class="btn-join">PŘIPOJIT SE K NÁM</a>
+    <a href="https://discord.gg/v8s92A2teN" target="_blank" class="btn-join">VSTOUPIT NA DISCORD</a>
   </aside>
 </div>
 
 <script>
-  // --- LOGIKA PRO NAČÍTÁNÍ ZPRÁV Z WEBHOOKU ---
+  // --- REAL-TIME SYNC LOGIKA ---
   async function loadMessages() {
     try {
-      // Načte JSON soubor vytvořený PHP skriptem
+      // Načte JSON soubor vytvořený Webhookem
+      // Přidáváme unikátní parametr ?t=, aby prohlížeč neukládal starou verzi do paměti (cache)
       const response = await fetch('messages.json?t=' + Date.now());
+      if (!response.ok) throw new Error();
       const messages = await response.json();
       
       const container = document.getElementById('announcements');
@@ -157,16 +161,18 @@
       if (messages && messages.length > 0) {
         container.innerHTML = messages.map(m => `
           <div class="announcement-box">
-            <div style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 8px;">
-              <i class="fa-regular fa-clock"></i> ${m.date} v ${m.time}
+            <div style="font-size: 0.75rem; opacity: 0.6; margin-bottom: 10px; font-weight: 600; display: flex; align-items: center; gap: 6px;">
+              <i class="fa-regular fa-calendar-check" style="color: var(--accent);"></i> ${m.date} <span style="opacity: 0.3;">|</span> <i class="fa-regular fa-clock"></i> ${m.time}
             </div>
-            <p style="white-space: pre-wrap;">${escapeHtml(m.text)}</p>
+            <p style="white-space: pre-wrap; line-height: 1.5; font-size: 0.95rem;">${escapeHtml(m.text)}</p>
           </div>
         `).join('');
-        document.getElementById('syncTime').textContent = 'Naposledy aktualizováno: ' + new Date().toLocaleTimeString();
+        document.getElementById('syncTime').textContent = 'POSLEDNÍ SYNC: ' + new Date().toLocaleTimeString();
+      } else {
+        container.innerHTML = '<div class="empty-msg">Zatím nebyla odeslána žádná oznámení.</div>';
       }
     } catch(e) {
-      console.log("Zatím žádné zprávy v messages.json");
+      document.getElementById('announcements').innerHTML = '<div class="empty-msg">Napište první oznámení na Discordu pro aktivaci feedu.</div>';
     }
   }
 
@@ -176,15 +182,15 @@
     return div.innerHTML;
   }
 
-  // --- OSTATNÍ FUNKCE ---
   async function updateStatus() {
     try {
         const res = await fetch('https://discord.com/api/guilds/1433583582567338060/widget.json');
         const data = await res.json();
-        document.getElementById('onlineCount').textContent = data.presence_count || "Aktivní";
-    } catch(e) { document.getElementById('onlineCount').textContent = "Live"; }
+        document.getElementById('onlineCount').textContent = data.presence_count || "LIVE";
+    } catch(e) { document.getElementById('onlineCount').textContent = "ONLINE"; }
   }
 
+  // --- THEME & INIT ---
   const tBtn = document.getElementById('themeToggle');
   tBtn.onclick = () => {
     document.body.classList.toggle('dark');
@@ -198,11 +204,10 @@
     tBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
   }
   
-  // Spustit smyčky
   updateStatus();
   loadMessages();
-  setInterval(updateStatus, 30000);
-  setInterval(loadMessages, 5000); // Kontrola nových zpráv každých 5 sekund
+  setInterval(updateStatus, 30000); // Stav online lidí každých 30s
+  setInterval(loadMessages, 3000);  // Nové zprávy každé 3 sekundy pro pocit reálného času
 </script>
 
 </body>
