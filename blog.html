@@ -1,234 +1,258 @@
 <!doctype html>
-<html lang="en">
+<html lang="cs">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<link rel="icon" href="assets/favicon-32.png" sizes="32x32">
-<link rel="icon" href="assets/favicon-64.png" sizes="64x64">
-<link rel="shortcut icon" href="d/favicon.ico" type="image/x-icon">
- 
+<title>Oznámení — StormVoice CZ/SK</title>
 
-<title>Blog — DarkVoice</title>
-
-<!-- FUTURISTIC STYLE -->
-<style>
-/* ---------------------- */
-/* FUTURISTIC THEME SETUP */
-/* ---------------------- */
-
-:root {
-  --bg: #f4f5f7;
-  --card: #ffffffcc;
-  --text: #111;
-  --accent: #00aaff;
-  --nav-bg: #ffffffaa;
-}
-
-body.dark {
-  --bg: #0e0e11;
-  --card: #1a1a22cc;
-  --text: #ffffff;
-  --accent: #00d0ff;
-  --nav-bg: #1a1a22aa;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Segoe UI", Roboto, sans-serif;
-}
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  transition: 0.35s ease;
-}
-
-.site {
-  max-width: 1150px;
-  margin: auto;
-  padding: 20px;
-}
-
-/* ---------------------- */
-/* HEADER + BRAND         */
-/* ---------------------- */
-
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: var(--nav-bg);
-  padding: 15px 20px;
-  border-radius: 18px;
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--accent);
-  margin-bottom: 20px;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.brand img {
-  width: 60px;
-  height: 60px;
-}
-
-.brand h1 {
-  font-size: 1.7rem;
-  margin-bottom: 2px;
-}
-
-.small {
-  font-size: 0.85rem;
-  opacity: 0.8;
-}
-
-/* ---------------------- */
-/* THEME TOGGLE BUTTON    */
-/* ---------------------- */
-
-.theme-btn {
-  background: transparent;
-  border: 2px solid var(--accent);
-  padding: 6px 12px;
-  border-radius: 12px;
-  cursor: pointer;
-  font-size: 18px;
-  transition: 0.3s;
-  color: var(--text);
-  margin-right: 20px;
-}
-
-.theme-btn:hover {
-  background: var(--accent);
-  color: var(--bg);
-}
-
-/* ---------------------- */
-/* NAVIGATION             */
-/* ---------------------- */
-
-nav {
-  display: flex;
-  gap: 12px;
-}
-
-nav a {
-  padding: 8px 14px;
-  text-decoration: none;
-  color: var(--text);
-  border-radius: 10px;
-  transition: 0.25s;
-  border: 1px solid transparent;
-}
-
-nav a:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-/* ---------------------- */
-/* MAIN CARD              */
-/* ---------------------- */
-
-.card {
-  background: var(--card);
-  border: 1px solid var(--accent);
-  padding: 25px;
-  border-radius: 20px;
-  backdrop-filter: blur(10px);
-  margin-bottom: 20px;
-  transition: 0.35s;
-  box-shadow: 0 0 15px #00000015;
-}
-
-h2 {
-  margin-bottom: 8px;
-}
-
-/* ---------------------- */
-/* FOOTER                 */
-/* ---------------------- */
-
-.footer {
-  text-align: center;
-  opacity: 0.8;
-  margin-top: 25px;
-}
-</style>
-
-<!-- ICONS -->
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
+<style>
+    :root {
+      --bg: #f8fafc;
+      --text: #0f172a;
+      --accent: #2563eb;
+      --accent-glow: rgba(37, 99, 235, 0.15);
+      --card-bg: rgba(255, 255, 255, 0.7);
+      --border: rgba(0, 0, 0, 0.08);
+      --nav-bg: rgba(255, 255, 255, 0.85);
+      --discord: #5865F2;
+    }
+
+    body.dark {
+      --bg: #020617;
+      --text: #f1f5f9;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.2);
+      --card-bg: rgba(15, 23, 42, 0.7);
+      --border: rgba(255, 255, 255, 0.08);
+      --nav-bg: rgba(15, 23, 42, 0.9);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.3s ease; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .brand-name { font-family: 'Oxanium', sans-serif; }
+
+    /* HEADER */
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 5%; background: var(--nav-bg); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000;
+    }
+
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand img { height: 45px; filter: drop-shadow(0 0 8px var(--accent)); border-radius: 8px; }
+    .brand-name { font-size: 1.3rem; font-weight: 700; background: linear-gradient(90deg, var(--text), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    nav { display: flex; gap: 10px; }
+    nav a { color: var(--text); text-decoration: none; font-size: 0.9rem; padding: 8px 15px; border-radius: 8px; font-weight: 500; }
+    nav a:hover { background: var(--border); color: var(--accent); }
+    nav a.active { color: var(--accent); background: var(--accent-glow); }
+
+    /* MAIN CONTENT */
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 1fr 350px;
+      gap: 30px;
+    }
+
+    .main-area .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 30px;
+      backdrop-filter: blur(15px);
+      margin-bottom: 30px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+    }
+
+    /* DISCORD REALTIME WIDGET */
+    .discord-sidebar {
+      position: sticky;
+      top: 100px;
+    }
+
+    .discord-card {
+      background: var(--discord);
+      color: white;
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: 0 15px 30px rgba(88, 101, 242, 0.3);
+      text-align: center;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,0,0,0.2);
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      margin-bottom: 15px;
+    }
+
+    .pulse {
+      width: 8px; height: 8px; background: #10b981; border-radius: 50%;
+      animation: pulse-animation 2s infinite;
+    }
+
+    @keyframes pulse-animation {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+
+    .announcement-item {
+      padding: 20px;
+      border-radius: 16px;
+      background: rgba(0,0,0,0.02);
+      border-left: 4px solid var(--accent);
+      margin-bottom: 20px;
+    }
+    body.dark .announcement-item { background: rgba(255,255,255,0.02); }
+
+    .btn-discord {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: white;
+      color: var(--discord);
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 700;
+      font-family: 'Oxanium', sans-serif;
+      margin-top: 20px;
+    }
+
+    footer { text-align: center; padding: 40px; opacity: 0.5; font-size: 0.85rem; border-top: 1px solid var(--border); }
+
+    @media (max-width: 900px) {
+      .container { grid-template-columns: 1fr; }
+      header { flex-direction: column; gap: 15px; }
+    }
+</style>
 </head>
 <body>
 
-<div class="site">
-
 <header>
-
   <div class="brand">
-    <div class="logo"><img src="assets/YP.png" alt="DarkVoice logo"></div>
+    <img src="assets/DK.png" alt="SV">
     <div>
-      <h1>DarkVoice</h1>
-      <div class="small">The Best Voice Chat in Roblox</div>
+      <div class="brand-name">STORMVOICE</div>
+      <div style="font-size: 10px; letter-spacing: 1.5px; opacity: 0.7; font-weight: 700;">CZ/SK KOMUNITA</div>
     </div>
   </div>
 
-  <button id="themeToggle" class="theme-btn">
-    <i class="fa-solid fa-sun"></i>
-  </button>
-
-  <nav id="navMenu">
-    <a class="link" href="index.html">🛖 Home</a>
-    <a class="link" href="shop.html">🛒 Shop</a>
-    <a class="link" href="blog.html">📰 Blog</a>
-    <a class="link" href="stats.html">📃 Statistics</a>
-    <a class="link" href="about.html">📚 About Server</a>
-    <a class="link" href="servers.html">🖥️ Servers</a>
-    <a class="link" href="adminteam.html">👥 Admin Team</a>
-    <a class="link" href="admin.html">⚙️ Admin</a>
+  <nav>
+    <a href="index.html">Domů</a>
+    <a href="blog.html" class="active">Oznámení</a>
+    <a href="shop.html">Obchod</a>
+    <a href="adminteam.html">Tým</a>
+    <a href="admin.html">Admin</a>
   </nav>
 
+  <button id="themeToggle" style="background:transparent; border:1px solid var(--border); color:var(--text); padding:8px 18px; border-radius:20px; cursor:pointer;">
+    <i class="fa-solid fa-moon"></i>
+  </button>
 </header>
 
-<main>
+<div class="container">
+  <main class="main-area">
+    <section class="card">
+      <h2 class="section-title"><i class="fa-solid fa-bullhorn" style="color: var(--accent);"></i> Aktuální Oznámení</h2>
+      
+      <div id="announcementList">
+        <!-- Zde jsou statické ukázky, které se dají nahradit API feedem -->
+        <div class="announcement-item">
+          <div style="font-size: 0.75rem; opacity: 0.6; margin-bottom: 5px;">5. DUBNA 2026</div>
+          <h3 style="margin-bottom: 10px;">Spuštění nového webu StormVoice!</h3>
+          <p>Dnes jsme oficiálně spustili náš nový web s real-time integrací Robloxu a Discordu. Sledujte nás pro další updaty.</p>
+        </div>
 
-<section class="card">
-  <h2>Blog</h2>
-  <p class="small">News & announcements.</p>
-</section>
+        <div class="announcement-item">
+          <div style="font-size: 0.75rem; opacity: 0.6; margin-bottom: 5px;">3. DUBNA 2026</div>
+          <h3 style="margin-bottom: 10px;">Nábor do Admin Týmu</h3>
+          <p>Hledáme nové posily! Pokud máš zájem stát se součástí StormVoice týmu, podej si přihlášku na našem Discordu.</p>
+        </div>
+      </div>
+    </section>
+  </main>
 
-</main>
+  <aside class="discord-sidebar">
+    <div class="discord-card">
+      <div class="status-badge">
+        <div class="pulse"></div> Real-time Sync
+      </div>
+      <i class="fa-brands fa-discord" style="font-size: 3rem; margin-bottom: 15px;"></i>
+      <h3>Discord Komunita</h3>
+      <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.9;">
+        Online členů: <span id="discordCount">...</span>
+      </p>
+      
+      <!-- Live widget iframe (nahraď ID svým serverem pokud máš zapnutý widget) -->
+      <iframe src="https://discord.com/widget?id=537043716&theme=dark" width="100%" height="300" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts" style="margin-top: 20px; border-radius: 12px;"></iframe>
 
-<footer class="footer">
-  <small>© <span data-year></span> DarkVoice — All rights reserved</small>
-</footer>
-
+      <a href="https://discord.gg/jtjfSgTbGF" target="_blank" class="btn-discord">VSTOUPIT NA SERVER</a>
+    </div>
+  </aside>
 </div>
 
-<!-- JS -->
+<footer>
+  <small>© <span id="year"></span> StormVoice CZ/SK — All rights reserved</small>
+</footer>
+
 <script>
-document.querySelectorAll("[data-year]").forEach(el => {
-  el.textContent = new Date().getFullYear();
-});
+/* REALTIME DISCORD DATA */
+async function fetchDiscordStatus() {
+    try {
+        // Používáme veřejné widget API (vyžaduje zapnutý widget v nastavení serveru)
+        const response = await fetch('https://discord.com/api/guilds/123456789/widget.json'); // Nahraď ID tvým Guild ID
+        const data = await response.json();
+        document.getElementById('discordCount').textContent = data.presence_count || "Online";
+    } catch (e) {
+        document.getElementById('discordCount').textContent = "Live";
+    }
+}
 
-// Theme button
-const btn = document.getElementById("themeToggle");
+/* UI LOGIKA */
+const tBtn = document.getElementById('themeToggle');
+tBtn.onclick = () => {
+    document.body.classList.toggle('dark');
+    const isDark = document.body.classList.contains('dark');
+    tBtn.innerHTML = isDark ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+    localStorage.setItem('sv_theme', isDark ? 'dark' : 'light');
+};
 
-btn.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
+document.getElementById('year').textContent = new Date().getFullYear();
+if(localStorage.getItem('sv_theme') === 'dark') {
+    document.body.classList.add('dark');
+    tBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
+}
 
-  btn.innerHTML = document.body.classList.contains("dark")
-    ? '<i class="fa-solid fa-moon"></i>'
-    : '<i class="fa-solid fa-sun"></i>';
-});
+fetchDiscordStatus();
+// Auto refresh každých 60 sekund
+setInterval(fetchDiscordStatus, 60000);
 </script>
 
 </body>
