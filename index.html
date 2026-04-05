@@ -1,47 +1,69 @@
 <!doctype html>
-<html lang="en">
+<html lang="cs">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>Home — DarkVoice</title>
+<title>StormVoice CZ/SK</title>
 
-<!-- Futuristic Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;700&display=swap" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-<link rel="icon" href="assets/favicon-32.png" sizes="32x32">
-<link rel="icon" href="assets/favicon-64.png" sizes="64x64">
-<link rel="shortcut icon" href="d/favicon.ico" type="image/x-icon">
- 
+
 <style>
+    :root {
+      --bg: #f8fafc;
+      --text: #0f172a;
+      --accent: #2563eb;
+      --accent-glow: rgba(37, 99, 235, 0.2);
+      --card-bg: rgba(255, 255, 255, 0.7);
+      --border: rgba(0, 0, 0, 0.08);
+      --nav-bg: rgba(255, 255, 255, 0.8);
+    }
+
+    body.dark {
+      --bg: #020617;
+      --text: #f1f5f9;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.2);
+      --card-bg: rgba(15, 23, 42, 0.7);
+      --border: rgba(255, 255, 255, 0.08);
+      --nav-bg: rgba(15, 23, 42, 0.85);
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Oxanium', sans-serif;
-      transition: background 0.25s, color 0.25s, box-shadow 0.25s;
-    }
-
-    :root {
-      --bg: #f5f6f7;
-      --text: #232323;
-      --card-bg: rgba(255,255,255,0.65);
-      --border: rgba(0,0,0,0.06);
-      --glow: rgba(180, 220, 255, 0.25);
-    }
-
-    body.dark {
-      --bg: #05060a;
-      --text: #eaeaea;
-      --card-bg: rgba(20,24,35,0.7);
-      --border: rgba(255,255,255,0.08);
-      --glow: #009dff33;
+      transition: background 0.3s ease, color 0.3s ease, border 0.3s ease, transform 0.2s ease;
     }
 
     body {
       background: var(--bg);
       color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
       overflow-x: hidden;
+    }
+
+    h1, h2, h3, .brand-name {
+      font-family: 'Oxanium', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    /* BACKGROUND DECORATION */
+    body::before {
+      content: "";
+      position: fixed;
+      top: -10%;
+      right: -10%;
+      width: 40%;
+      height: 40%;
+      background: var(--accent-glow);
+      filter: blur(120px);
+      border-radius: 50%;
+      z-index: -1;
     }
 
     /* HEADER */
@@ -49,17 +71,14 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 40px;
-      background: rgba(255,255,255,0.4);
+      padding: 1rem 5%;
+      background: var(--nav-bg);
       backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
-      z-index: 50;
-      box-shadow: 0 4px 18px var(--glow);
-    }
-    body.dark header {
-      background: rgba(15,17,25,0.65);
+      z-index: 1000;
     }
 
     .brand {
@@ -69,174 +88,207 @@
     }
 
     .brand img {
-      height: 60px;
-      filter: drop-shadow(0 0 6px #7acbff);
+      height: 50px;
+      filter: drop-shadow(0 0 10px var(--accent));
     }
 
-    h1 {
-      font-size: 26px;
+    .brand-name {
+      font-size: 1.5rem;
+      background: linear-gradient(90deg, var(--text), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .small-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
       letter-spacing: 1px;
-      text-shadow: 0 0 8px #b9e9ff;
+      opacity: 0.7;
+      font-weight: 600;
     }
 
+    /* NAVIGATION */
     nav {
       display: flex;
-      gap: 18px;
+      gap: 5px;
     }
 
     nav .link {
       color: var(--text);
       text-decoration: none;
-      font-size: 16px;
-      padding: 8px 14px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 8px 15px;
       border-radius: 8px;
-      transition: 0.2s;
     }
 
     nav .link:hover {
-      background: rgba(180,180,180,0.15);
-      box-shadow: 0 0 10px #b3e4ff;
+      background: var(--border);
+      color: var(--accent);
     }
 
-    /* THEME SWITCH BUTTON */
+    /* BUTTONS */
     #themeToggle {
-      padding: 8px 14px;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
+      padding: 10px 20px;
+      border: 1px solid var(--border);
+      border-radius: 50px;
       cursor: pointer;
-      background: #7ad3ff;
-      color: #000;
-      box-shadow: 0 0 10px #c2ecff;
-      transition: 0.2s;
-    }
-
-    body.dark #themeToggle {
-      background: #0e1320;
-      color: #fff;
-      box-shadow: 0 0 10px #009dff;
+      background: var(--card-bg);
+      color: var(--text);
+      font-family: 'Oxanium', sans-serif;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     #themeToggle:hover {
-      transform: scale(1.05);
+      border-color: var(--accent);
+      box-shadow: 0 0 15px var(--accent-glow);
     }
 
-    /* MAIN CARD */
-    .card {
-      max-width: 900px;
-      margin: 100px auto;
-      padding: 40px;
-      background: var(--card-bg);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      box-shadow: 0 0 30px var(--glow);
-      text-align: center;
-      animation: fadeIn 1.4s ease;
-    }
-
-    .card h2 {
-      font-size: 34px;
-      margin-bottom: 15px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 12px 25px;
-      background: #7ad3ff;
-      color: #000;
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      padding: 14px 32px;
+      background: var(--accent);
+      color: white;
       text-decoration: none;
-      border-radius: 10px;
+      border-radius: 12px;
       font-weight: 700;
-      box-shadow: 0 0 15px #c2ecff;
-      transition: 0.25s;
+      font-family: 'Oxanium', sans-serif;
+      box-shadow: 0 10px 20px var(--accent-glow);
+      margin-top: 20px;
     }
 
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 30px #c2ecff;
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      filter: brightness(1.1);
+      box-shadow: 0 15px 30px var(--accent-glow);
+    }
+
+    /* MAIN CONTENT */
+    main {
+      padding: 80px 5%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-card {
+      max-width: 850px;
+      width: 100%;
+      background: var(--card-bg);
+      padding: 60px 40px;
+      border-radius: 32px;
+      border: 1px solid var(--border);
+      backdrop-filter: blur(20px);
+      text-align: center;
+      animation: slideUp 1s ease-out;
+    }
+
+    .hero-card h2 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      line-height: 1.1;
+    }
+
+    .hero-card p {
+      font-size: 1.1rem;
+      opacity: 0.8;
+      max-width: 600px;
+      margin: 0 auto 30px;
     }
 
     footer {
       text-align: center;
-      padding: 25px;
-      margin-top: 60px;
-      background: rgba(0,0,0,0.05);
-      font-size: 14px;
+      padding: 40px;
       border-top: 1px solid var(--border);
-    }
-    body.dark footer {
-      background: #0c1018;
+      font-size: 0.9rem;
+      opacity: 0.7;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
+    @media (max-width: 992px) {
+      header { flex-direction: column; gap: 20px; padding: 20px; }
+      nav { flex-wrap: wrap; justify-content: center; }
+      .hero-card h2 { font-size: 2.2rem; }
+    }
 </style>
 </head>
 <body>
 
 <header>
   <div class="brand">
-    <img src="assets/DK.png" alt="">
+    <img src="assets/DK.png" alt="StormVoice Logo">
     <div>
-      <h1>DarkVoice</h1>
-      <div class="small">The Best Voice Chat on Roblox</div>
+      <div class="brand-name">STORMVOICE CZ/SK</div>
+      <div class="small-tag">Nejlepší Voice Chat na Robloxu</div>
     </div>
   </div>
 
   <nav id="navMenu">
-    <a class="link" href="index.html">🛖 Home</a>
-    <a class="link" href="shop.html">🛒 Shop</a>
-    <a class="link" href="blog.html">📰 Blog</a>
-    <a class="link" href="stats.html">📃 Statistics</a>
-    <a class="link" href="about.html">📚 About</a>
-    <a class="link" href="servers.html">🖥️ Servers</a>
-    <a class="link" href="adminteam.html">👥 Admin Team</a>
-    <a class="link" href="admin.html">⚙️ Admin</a>
+    <a class="link" href="index.html"><i class="fa-solid fa-house"></i> Domů</a>
+    <a class="link" href="shop.html"><i class="fa-solid fa-cart-shopping"></i> Obchod</a>
+    <a class="link" href="stats.html"><i class="fa-solid fa-chart-simple"></i> Statistiky</a>
+    <a class="link" href="servers.html"><i class="fa-solid fa-server"></i> Servery</a>
+    <a class="link" href="about.html"><i class="fa-solid fa-circle-info"></i> O nás</a>
   </nav>
 
-  <!-- Theme Toggle Button -->
-  <button id="themeToggle">🌙 Dark</button>
+  <button id="themeToggle">
+    <i class="fa-solid fa-moon"></i> <span>Dark</span>
+  </button>
 </header>
 
 <main>
-<section class="card">
-  <h2>Welcome to DarkVoice</h2>
-  <p>Step into a world where words come alive! DarkVoice is an interactive voice chat experience for Roblox.</p>
-  <a class="btn" href="servers.html">Join Now</a>
-</section>
+  <section class="hero-card">
+    <div class="small-tag" style="color: var(--accent); margin-bottom: 10px;">Vítejte v nové éře</div>
+    <h2>Propojte se se světem StormVoice</h2>
+    <p>Vstupte do světa, kde slova ožívají. StormVoice přináší nejplynulejší a nejvíce interaktivní voice chat zážitek pro komunitu CZ/SK na Robloxu.</p>
+    <a class="btn-primary" href="servers.html">
+        Začít hrát <i class="fa-solid fa-arrow-right" style="margin-left: 10px;"></i>
+    </a>
+  </section>
 </main>
 
 <footer>
-  <small>© <span data-year></span> DarkVoice — All Rights Reserved</small>
+  <small>© <span data-year></span> StormVoice CZ/SK — Všechna práva vyhrazena</small>
 </footer>
 
-<!-- AUTO YEAR + THEME LOGIC -->
 <script>
+  // Dynamický rok
   document.querySelector("[data-year]").textContent = new Date().getFullYear();
 
   const toggle = document.getElementById("themeToggle");
+  const toggleIcon = toggle.querySelector("i");
+  const toggleText = toggle.querySelector("span");
   const body = document.body;
 
-  // Load saved theme
+  // Funkce pro aktualizaci UI tlačítka
+  function updateThemeUI(isDark) {
+    if (isDark) {
+      toggleIcon.className = "fa-solid fa-sun";
+      toggleText.textContent = "Light";
+    } else {
+      toggleIcon.className = "fa-solid fa-moon";
+      toggleText.textContent = "Dark";
+    }
+  }
+
+  // Načtení motivu
   if(localStorage.getItem("theme") === "dark") {
     body.classList.add("dark");
-    toggle.textContent = "☀️ Light";
+    updateThemeUI(true);
   }
 
   toggle.addEventListener("click", () => {
     body.classList.toggle("dark");
-
-    if(body.classList.contains("dark")) {
-      localStorage.setItem("theme", "dark");
-      toggle.textContent = "☀️ Light";
-    } else {
-      localStorage.setItem("theme", "light");
-      toggle.textContent = "🌙 Dark";
-    }
+    const isDark = body.classList.contains("dark");
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+    updateThemeUI(isDark);
   });
 </script>
 
