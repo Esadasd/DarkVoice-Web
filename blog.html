@@ -54,10 +54,9 @@
 
     .main-content .card {
       background: var(--card-bg); border: 1px solid var(--border); border-radius: 24px;
-      padding: 30px; backdrop-filter: blur(15px);
+      padding: 30px; backdrop-filter: blur(15px); min-height: 400px;
     }
 
-    /* REAL-TIME FEED EMULATION */
     .feed-header { display: flex; align-items: center; gap: 10px; margin-bottom: 25px; }
     .live-dot { width: 10px; height: 10px; background: #10b981; border-radius: 50%; animation: pulse 2s infinite; }
     @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
@@ -65,14 +64,16 @@
     .announcement-box {
       background: rgba(88, 101, 242, 0.05); border: 1px solid var(--border);
       border-radius: 16px; padding: 20px; margin-bottom: 20px; position: relative;
+      animation: fadeIn 0.5s ease-out;
     }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
     .announcement-box::before {
       content: "DISCORD FEED"; position: absolute; top: -10px; right: 20px;
       background: var(--discord); color: white; font-size: 10px; font-weight: 800;
       padding: 2px 8px; border-radius: 4px; font-family: 'Oxanium';
     }
 
-    /* SIDEBAR WIDGET */
     .discord-widget-container { position: sticky; top: 100px; }
     .widget-info {
         background: var(--discord); color: white; padding: 20px;
@@ -87,6 +88,8 @@
         text-align: center; font-weight: 700; font-family: 'Oxanium';
         margin-top: 15px; box-shadow: 0 10px 20px rgba(88, 101, 242, 0.2);
     }
+
+    .empty-msg { text-align: center; opacity: 0.5; padding: 50px 0; }
 
     @media (max-width: 950px) {
       .container { grid-template-columns: 1fr; }
@@ -118,18 +121,12 @@
       <div class="feed-header">
         <div class="live-dot"></div>
         <h2 style="font-family: 'Oxanium';">Live Oznámení</h2>
+        <span style="font-size: 0.7rem; opacity: 0.4; margin-left: auto;" id="syncTime">Sync: aktivní</span>
       </div>
 
+      <!-- SEM SE BUDOU SYPAT ZPRÁVY Z DISCORDU -->
       <div id="announcements">
-        <div class="announcement-box">
-          <div style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 8px;">Dnes v 16:20</div>
-          <p>Právě probíhá synchronizace s kanálem <strong>#1433583582567338060</strong>. Všechna důležitá herní oznámení ze StormVoice se budou zobrazovat zde i na našem Discordu.</p>
-        </div>
-        
-        <div class="announcement-box" style="opacity: 0.7;">
-          <div style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 8px;">Včera</div>
-          <p>Nezapomeňte se připojit k našemu sobotnímu eventu na Robloxu! Více info v kanálu #events.</p>
-        </div>
+        <div class="empty-msg">Čekám na zprávy z Discordu...</div>
       </div>
     </div>
   </main>
@@ -141,7 +138,6 @@
         <p style="font-size: 0.8rem; opacity: 0.9;">Právě online: <span id="onlineCount">--</span></p>
     </div>
     
-    <!-- DISCORD WIDGET - Propojeno s tvým ID kanálu -->
     <iframe src="https://discord.com/widget?id=1433583582567338060&theme=dark" width="100%" height="450" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
 
     <a href="https://discord.gg/jtjfSgTbGF" target="_blank" class="btn-join">PŘIPOJIT SE K NÁM</a>
@@ -149,22 +145,46 @@
 </div>
 
 <script>
-  // Dynamické datum v patičce
-  const yearSpan = document.createElement('span');
-  document.body.appendChild(yearSpan); // Jen pro funkčnost skriptu
-  
-  // Real-time synchronizace stavu
+  // --- LOGIKA PRO NAČÍTÁNÍ ZPRÁV Z WEBHOOKU ---
+  async function loadMessages() {
+    try {
+      // Načte JSON soubor vytvořený PHP skriptem
+      const response = await fetch('messages.json?t=' + Date.now());
+      const messages = await response.json();
+      
+      const container = document.getElementById('announcements');
+      
+      if (messages && messages.length > 0) {
+        container.innerHTML = messages.map(m => `
+          <div class="announcement-box">
+            <div style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 8px;">
+              <i class="fa-regular fa-clock"></i> ${m.date} v ${m.time}
+            </div>
+            <p style="white-space: pre-wrap;">${escapeHtml(m.text)}</p>
+          </div>
+        `).join('');
+        document.getElementById('syncTime').textContent = 'Naposledy aktualizováno: ' + new Date().toLocaleTimeString();
+      }
+    } catch(e) {
+      console.log("Zatím žádné zprávy v messages.json");
+    }
+  }
+
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  // --- OSTATNÍ FUNKCE ---
   async function updateStatus() {
     try {
         const res = await fetch('https://discord.com/api/guilds/1433583582567338060/widget.json');
         const data = await res.json();
         document.getElementById('onlineCount').textContent = data.presence_count || "Aktivní";
-    } catch(e) {
-        document.getElementById('onlineCount').textContent = "Live";
-    }
+    } catch(e) { document.getElementById('onlineCount').textContent = "Live"; }
   }
 
-  // Theme Toggle
   const tBtn = document.getElementById('themeToggle');
   tBtn.onclick = () => {
     document.body.classList.toggle('dark');
@@ -173,14 +193,16 @@
     localStorage.setItem('sv_theme', isDark ? 'dark' : 'light');
   };
 
-  // Inicializace
   if(localStorage.getItem('sv_theme') === 'dark') {
     document.body.classList.add('dark');
     tBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
   }
   
+  // Spustit smyčky
   updateStatus();
-  setInterval(updateStatus, 30000); // Aktualizace každých 30 sekund
+  loadMessages();
+  setInterval(updateStatus, 30000);
+  setInterval(loadMessages, 5000); // Kontrola nových zpráv každých 5 sekund
 </script>
 
 </body>
