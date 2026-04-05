@@ -30,7 +30,7 @@
       --nav-bg: rgba(15, 23, 42, 0.9);
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.3s ease; }
+    * { margin: 0; padding: 0; box-sizing: border-box; transition: background 0.3s, color 0.3s, border 0.3s; }
 
     body {
       background: var(--bg);
@@ -60,16 +60,16 @@
     /* HERO SECTION */
     .hero {
       text-align: center;
-      padding: 60px 20px 20px;
+      padding: 60px 20px 40px;
     }
 
-    .hero h1 { font-size: 2.5rem; margin-bottom: 10px; }
-    .hero p { opacity: 0.7; max-width: 600px; margin: 0 auto; }
+    .hero h1 { font-size: 2.8rem; margin-bottom: 10px; font-weight: 700; }
+    .hero p { opacity: 0.7; max-width: 600px; margin: 0 auto; font-size: 1.1rem; }
 
     /* CONTROLS */
     .controls {
         max-width: 1200px;
-        margin: 20px auto;
+        margin: 0 auto 30px;
         display: flex;
         justify-content: center;
         gap: 15px;
@@ -79,29 +79,31 @@
         background: var(--card-bg);
         border: 1px solid var(--border);
         color: var(--text);
-        padding: 10px 20px;
+        padding: 12px 24px;
         border-radius: 12px;
         cursor: pointer;
         font-family: 'Oxanium', sans-serif;
         font-weight: 600;
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 10px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.02);
     }
 
-    .btn-view:hover { border-color: var(--accent); background: var(--accent-glow); }
+    .btn-view:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 15px var(--accent-glow); }
 
     /* ADMIN GRID */
     .admin-container {
       max-width: 1200px;
-      margin: 20px auto 80px;
+      margin: 0 auto 80px;
       padding: 0 20px;
+      min-height: 400px;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
     }
 
     .list {
@@ -116,88 +118,103 @@
     .admin-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 20px;
+      border-radius: 24px;
+      padding: 25px;
       display: flex;
       align-items: center;
       gap: 20px;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(15px);
       position: relative;
-      overflow: hidden;
+      animation: fadeInUp 0.5s ease backwards;
     }
 
     .admin-card:hover {
-      transform: translateY(-5px);
       border-color: var(--accent);
-      box-shadow: 0 10px 30px var(--accent-glow);
+      background: var(--nav-bg);
+      box-shadow: 0 15px 35px var(--accent-glow);
     }
 
     .avatar-wrapper {
       position: relative;
-      width: 80px;
-      height: 80px;
+      width: 90px;
+      height: 90px;
       flex-shrink: 0;
     }
 
     .avatar-img {
       width: 100%;
       height: 100%;
-      border-radius: 15px;
+      border-radius: 20px;
       object-fit: cover;
       background: var(--bg);
       border: 2px solid var(--border);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
     }
 
     .status-dot {
         position: absolute;
-        bottom: -2px;
-        right: -2px;
-        width: 16px;
-        height: 16px;
+        bottom: 2px;
+        right: 2px;
+        width: 18px;
+        height: 18px;
         background: #10b981;
-        border: 3px solid var(--card-bg);
+        border: 4px solid var(--card-bg);
         border-radius: 50%;
+        animation: pulse 2s infinite;
     }
 
-    .admin-info h3 { font-size: 1.1rem; margin-bottom: 4px; }
+    @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.7; } 100% { transform: scale(1); opacity: 1; } }
+
+    .admin-info h3 { font-size: 1.25rem; margin-bottom: 2px; font-weight: 700; }
+    
     .rank-badge {
       display: inline-block;
-      font-size: 0.7rem;
-      font-weight: 700;
+      font-size: 0.75rem;
+      font-weight: 800;
       text-transform: uppercase;
-      padding: 3px 10px;
-      border-radius: 6px;
+      padding: 4px 12px;
+      border-radius: 8px;
       background: var(--accent-glow);
       color: var(--accent);
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
     }
 
+    .badge-high { background: #ef4444; color: white; }
+
     .profile-link {
-        font-size: 0.8rem;
-        color: var(--accent);
+        font-size: 0.85rem;
+        color: var(--text);
         text-decoration: none;
         display: flex;
         align-items: center;
-        gap: 5px;
-        margin-top: 5px;
-        opacity: 0.8;
+        gap: 8px;
+        margin-top: 8px;
+        opacity: 0.6;
+        font-weight: 500;
     }
 
-    .profile-link:hover { opacity: 1; text-decoration: underline; }
+    .profile-link:hover { opacity: 1; color: var(--accent); }
 
-    /* LOADING SPINNER */
+    /* LOADER */
     .loader {
+        grid-column: 1 / -1;
         text-align: center;
-        padding: 50px;
-        font-size: 1.2rem;
-        opacity: 0.5;
+        padding: 100px;
+        font-family: 'Oxanium', sans-serif;
     }
 
-    footer { text-align: center; padding: 40px; opacity: 0.6; font-size: 0.85rem; border-top: 1px solid var(--border); }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-    @media (max-width: 600px) {
-        header { flex-direction: column; gap: 15px; }
-        .hero h1 { font-size: 1.8rem; }
+    footer { text-align: center; padding: 40px; opacity: 0.5; font-size: 0.85rem; border-top: 1px solid var(--border); }
+
+    @media (max-width: 700px) {
+        header { flex-direction: column; gap: 15px; padding: 20px; }
+        .hero h1 { font-size: 2rem; }
+        .controls { flex-direction: column; align-items: center; }
     }
 </style>
 </head>
@@ -208,7 +225,7 @@
     <img src="assets/DK.png" alt="SV">
     <div>
       <div class="brand-name">STORMVOICE</div>
-      <div style="font-size: 10px; letter-spacing: 1px; opacity: 0.7;">CZ/SK KOMUNITA</div>
+      <div style="font-size: 10px; letter-spacing: 1.5px; opacity: 0.7; font-weight: 700;">CZ/SK TEAM</div>
     </div>
   </div>
 
@@ -219,115 +236,108 @@
     <a href="admin.html">Admin</a>
   </nav>
 
-  <button id="themeToggle" style="background:transparent; border:1px solid var(--border); color:var(--text); padding:8px 15px; border-radius:20px; cursor:pointer;">
+  <button id="themeToggle" style="background:transparent; border:1px solid var(--border); color:var(--text); padding:10px 18px; border-radius:20px; cursor:pointer;">
     <i class="fa-solid fa-moon"></i>
   </button>
 </header>
 
 <section class="hero">
-    <h1>Náš Admin Tým</h1>
-    <p>Lidé, kteří se starají o bezpečnost a plynulý chod StormVoice. Data jsou synchronizována přímo s Roblox skupinou.</p>
+    <h1>Vedení Projektu</h1>
+    <p>Náš tým zajišťuje férové prostředí a neustálý vývoj StormVoice. Ranky jsou synchronizovány s Roblox skupinou v reálném čase.</p>
 </section>
 
 <div class="controls">
     <button class="btn-view" id="toggleView">
-        <i class="fa-solid fa-list"></i> Přepnout zobrazení
+        <i class="fa-solid fa-grip"></i> Změnit zobrazení
     </button>
     <button class="btn-view" id="refreshBtn">
-        <i class="fa-solid fa-rotate"></i> Aktualizovat
+        <i class="fa-solid fa-arrows-rotate"></i> Aktualizovat data
     </button>
 </div>
 
 <div class="admin-container">
     <div id="adminList" class="grid">
-        <!-- Zde se načtou admini -->
-        <div class="loader"><i class="fa-solid fa-spinner fa-spin"></i> Načítám data z Robloxu...</div>
+        <div class="loader">
+            <i class="fa-solid fa-circle-notch fa-spin fa-3x" style="color: var(--accent); margin-bottom: 15px;"></i>
+            <p>Navazuji spojení s Roblox API...</p>
+        </div>
     </div>
 </div>
 
 <footer>
-  <small>© <span id="year"></span> StormVoice CZ/SK — Propojeno s Roblox Group ID: 34526172</small>
+  <small>© <span id="year"></span> StormVoice CZ/SK — Všechna data jsou čerpána z Group ID: 537043716</small>
 </footer>
 
 <script>
 /* KONFIGURACE */
 const GROUP_ID = "537043716";
-// Seznam jmen členů týmu, které chceš zobrazit (aby se nezobrazovala celá groupka, ale jen AT)
-const staffUsernames = ["VoidSpecter", "tvojahellokitty", "Mia", "klaudia", "v4nxskq", "Sqm0"];
+// Přidej sem uživatelská jména lidí, kteří mají být na stránce vidět
+const staffList = ["DarkSentinelCZ", "JONGLES_GAMESE", "Bobiiikminx"];
+const ROXY_USERS = "https://users.roproxy.com/v1";
+const ROXY_GROUPS = "https://groups.roproxy.com/v1";
 
-/* NAČÍTÁNÍ DAT */
 async function loadStaff() {
     const container = document.getElementById("adminList");
-    container.innerHTML = '<div class="loader"><i class="fa-solid fa-spinner fa-spin"></i> Synchronizuji s Robloxem...</div>';
-
+    // Necháme loader běžet
+    
     try {
-        // 1. Získáme ID uživatelů podle jmen
-        const userRes = await fetch("https://users.roblox.com/v1/usernames/users", {
+        // 1. Získáme ID uživatelů
+        const userRes = await fetch(`${ROXY_USERS}/usernames/users`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ usernames: staffUsernames, excludeBannedUsers: true })
+            body: JSON.stringify({ usernames: staffList, excludeBannedUsers: true })
         });
         const userData = await userRes.json();
-        const userIds = userData.data.map(u => u.id);
+        
+        container.innerHTML = ""; // Vyčistit loader
 
-        if (userIds.length === 0) throw new Error("Žádní uživatelé nenalezeni");
+        // 2. Pro každého uživatele načteme data v reálném čase
+        for (const user of userData.data) {
+            try {
+                // Zjistit rank v groupce
+                const groupRes = await fetch(`${ROXY_GROUPS}/users/${user.id}/groups/roles`);
+                const groups = await groupRes.json();
+                const svGroup = groups.data.find(g => g.group.id == GROUP_ID);
+                const rankName = svGroup ? svGroup.role.name : "Externí Tým";
+                
+                // Určit styl badge
+                const isHigh = rankName.toLowerCase().includes("owner") || rankName.toLowerCase().includes("founder") || rankName.toLowerCase().includes("admin");
 
-        // 2. Získáme jejich ranky v Groupce
-        // Poznámka: Tato API může vyžadovat proxy na ostrém webu kvůli CORS, pro testování v prohlížeči je to simulováno
-        const membersData = {};
-        for(let id of userIds) {
-            const groupRes = await fetch(`https://groups.roblox.com/v1/users/${id}/groups/roles`);
-            const groups = await groupRes.json();
-            const svGroup = groups.data.find(g => g.group.id == GROUP_ID);
-            membersData[id] = svGroup ? svGroup.role.name : "Člen Týmu";
+                const card = document.createElement("div");
+                card.className = "admin-card";
+                card.innerHTML = `
+                    <div class="avatar-wrapper">
+                        <img src="https://www.roblox.com/headshot-thumbnail/image?userId=${user.id}&width=150&height=150&format=png" class="avatar-img" alt="${user.name}">
+                        <div class="status-dot"></div>
+                    </div>
+                    <div class="admin-info">
+                        <span class="rank-badge ${isHigh ? 'badge-high' : ''}">${rankName}</span>
+                        <h3>${user.displayName}</h3>
+                        <div style="font-size: 0.8rem; opacity: 0.5;">@${user.name}</div>
+                        <a href="https://www.roblox.com/users/${user.id}/profile" target="_blank" class="profile-link">
+                            <i class="fa-brands fa-roblox"></i> Roblox Profil
+                        </a>
+                    </div>
+                `;
+                container.appendChild(card);
+            } catch (e) { console.error("Chyba u uživatele " + user.name, e); }
         }
 
-        // 3. Získáme avatary (Headshots)
-        const thumbRes = await fetch(`https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${userIds.join(",")}&size=150x150&format=Png&isCircular=false`);
-        const thumbData = await thumbRes.json();
-
-        // 4. Renderování
-        container.innerHTML = "";
-        userData.data.forEach(user => {
-            const avatar = thumbData.data.find(t => t.targetId === user.id)?.imageUrl || "assets/DK.png";
-            const rank = membersData[user.id];
-
-            const card = document.createElement("div");
-            card.className = "admin-card";
-            card.innerHTML = `
-                <div class="avatar-wrapper">
-                    <img src="${avatar}" class="avatar-img" alt="${user.name}">
-                    <div class="status-dot"></div>
-                </div>
-                <div class="admin-info">
-                    <span class="rank-badge">${rank}</span>
-                    <h3>${user.displayName}</h3>
-                    <div style="font-size: 0.75rem; opacity: 0.6; margin-top: -2px;">@${user.name}</div>
-                    <a href="https://www.roblox.com/users/${user.id}/profile" target="_blank" class="profile-link">
-                        <i class="fa-brands fa-roblox"></i> Profil
-                    </a>
-                </div>
-            `;
-            container.appendChild(card);
-        });
-
     } catch (err) {
-        container.innerHTML = `<div class="loader" style="color:#ef4444;">Chyba při načítání: ${err.message}<br><small>Zkontrolujte připojení nebo CORS proxy.</small></div>`;
+        container.innerHTML = `<div class="loader" style="color:#ef4444;">Nepodařilo se spojit s Robloxem. Zkuste to prosím později.</div>`;
     }
 }
 
-/* PŘEPÍNAČ ZOBRAZENÍ */
+/* UI LOGIKA */
 let isGrid = true;
 document.getElementById("toggleView").onclick = () => {
     const list = document.getElementById("adminList");
     isGrid = !isGrid;
     list.className = isGrid ? "grid" : "list";
-    document.getElementById("toggleView").innerHTML = isGrid ? 
-        '<i class="fa-solid fa-list"></i> Přepnout na seznam' : 
-        '<i class="fa-solid fa-grip"></i> Přepnout na mřížku';
 };
 
-/* THEME TOGGLE */
+document.getElementById("refreshBtn").onclick = loadStaff;
+
 const tBtn = document.getElementById('themeToggle');
 tBtn.onclick = () => {
     document.body.classList.toggle('dark');
@@ -336,11 +346,13 @@ tBtn.onclick = () => {
     localStorage.setItem('sv_theme', isDark ? 'dark' : 'light');
 };
 
-/* INIT */
-document.getElementById('refreshBtn').onclick = loadStaff;
 document.getElementById('year').textContent = new Date().getFullYear();
-if(localStorage.getItem('sv_theme') === 'dark') document.body.classList.add('dark');
+if(localStorage.getItem('sv_theme') === 'dark') {
+    document.body.classList.add('dark');
+    tBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
+}
 
+// Spustit načítání
 loadStaff();
 </script>
 
