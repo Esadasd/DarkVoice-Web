@@ -3,10 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-
 <title>Oznámení — StormVoice CZ/SK</title>
 
-<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
@@ -32,18 +30,10 @@
       --nav-bg: rgba(15, 23, 42, 0.9);
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.3s ease; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; transition: background 0.3s, color 0.3s; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; }
     h1, h2, h3, .brand-name { font-family: 'Oxanium', sans-serif; }
 
-    /* HEADER */
     header {
       display: flex; justify-content: space-between; align-items: center;
       padding: 1rem 5%; background: var(--nav-bg); backdrop-filter: blur(12px);
@@ -54,102 +44,53 @@
     .brand img { height: 45px; filter: drop-shadow(0 0 8px var(--accent)); border-radius: 8px; }
     .brand-name { font-size: 1.3rem; font-weight: 700; background: linear-gradient(90deg, var(--text), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-    nav { display: flex; gap: 10px; }
     nav a { color: var(--text); text-decoration: none; font-size: 0.9rem; padding: 8px 15px; border-radius: 8px; font-weight: 500; }
-    nav a:hover { background: var(--border); color: var(--accent); }
     nav a.active { color: var(--accent); background: var(--accent-glow); }
 
-    /* MAIN CONTENT */
     .container {
-      max-width: 1100px;
-      margin: 40px auto;
-      padding: 0 20px;
-      display: grid;
-      grid-template-columns: 1fr 350px;
-      gap: 30px;
+      max-width: 1200px; margin: 40px auto; padding: 0 20px;
+      display: grid; grid-template-columns: 1fr 380px; gap: 30px;
     }
 
-    .main-area .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 30px;
-      backdrop-filter: blur(15px);
-      margin-bottom: 30px;
+    .main-content .card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 24px;
+      padding: 30px; backdrop-filter: blur(15px);
     }
 
-    .section-title {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 20px;
-      font-size: 1.8rem;
+    /* REAL-TIME FEED EMULATION */
+    .feed-header { display: flex; align-items: center; gap: 10px; margin-bottom: 25px; }
+    .live-dot { width: 10px; height: 10px; background: #10b981; border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+
+    .announcement-box {
+      background: rgba(88, 101, 242, 0.05); border: 1px solid var(--border);
+      border-radius: 16px; padding: 20px; margin-bottom: 20px; position: relative;
+    }
+    .announcement-box::before {
+      content: "DISCORD FEED"; position: absolute; top: -10px; right: 20px;
+      background: var(--discord); color: white; font-size: 10px; font-weight: 800;
+      padding: 2px 8px; border-radius: 4px; font-family: 'Oxanium';
     }
 
-    /* DISCORD REALTIME WIDGET */
-    .discord-sidebar {
-      position: sticky;
-      top: 100px;
+    /* SIDEBAR WIDGET */
+    .discord-widget-container { position: sticky; top: 100px; }
+    .widget-info {
+        background: var(--discord); color: white; padding: 20px;
+        border-radius: 24px 24px 0 0; text-align: center;
     }
 
-    .discord-card {
-      background: var(--discord);
-      color: white;
-      border-radius: 24px;
-      padding: 20px;
-      box-shadow: 0 15px 30px rgba(88, 101, 242, 0.3);
-      text-align: center;
+    iframe { border-radius: 0 0 24px 24px; border: 1px solid var(--border); background: #2f3136; }
+
+    .btn-join {
+        display: block; width: 100%; padding: 15px; background: var(--discord);
+        color: white; text-decoration: none; border-radius: 12px;
+        text-align: center; font-weight: 700; font-family: 'Oxanium';
+        margin-top: 15px; box-shadow: 0 10px 20px rgba(88, 101, 242, 0.2);
     }
 
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(0,0,0,0.2);
-      padding: 5px 15px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      margin-bottom: 15px;
-    }
-
-    .pulse {
-      width: 8px; height: 8px; background: #10b981; border-radius: 50%;
-      animation: pulse-animation 2s infinite;
-    }
-
-    @keyframes pulse-animation {
-      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-      70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
-      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-    }
-
-    .announcement-item {
-      padding: 20px;
-      border-radius: 16px;
-      background: rgba(0,0,0,0.02);
-      border-left: 4px solid var(--accent);
-      margin-bottom: 20px;
-    }
-    body.dark .announcement-item { background: rgba(255,255,255,0.02); }
-
-    .btn-discord {
-      display: block;
-      width: 100%;
-      padding: 12px;
-      background: white;
-      color: var(--discord);
-      text-decoration: none;
-      border-radius: 12px;
-      font-weight: 700;
-      font-family: 'Oxanium', sans-serif;
-      margin-top: 20px;
-    }
-
-    footer { text-align: center; padding: 40px; opacity: 0.5; font-size: 0.85rem; border-top: 1px solid var(--border); }
-
-    @media (max-width: 900px) {
+    @media (max-width: 950px) {
       .container { grid-template-columns: 1fr; }
-      header { flex-direction: column; gap: 15px; }
+      .discord-widget-container { position: static; }
     }
 </style>
 </head>
@@ -158,101 +99,88 @@
 <header>
   <div class="brand">
     <img src="assets/DK.png" alt="SV">
-    <div>
-      <div class="brand-name">STORMVOICE</div>
-      <div style="font-size: 10px; letter-spacing: 1.5px; opacity: 0.7; font-weight: 700;">CZ/SK KOMUNITA</div>
-    </div>
+    <div class="brand-name">STORMVOICE</div>
   </div>
-
   <nav>
     <a href="index.html">Domů</a>
     <a href="blog.html" class="active">Oznámení</a>
-    <a href="shop.html">Obchod</a>
     <a href="adminteam.html">Tým</a>
     <a href="admin.html">Admin</a>
   </nav>
-
-  <button id="themeToggle" style="background:transparent; border:1px solid var(--border); color:var(--text); padding:8px 18px; border-radius:20px; cursor:pointer;">
+  <button id="themeToggle" style="background:transparent; border:1px solid var(--border); color:var(--text); padding:8px 15px; border-radius:20px; cursor:pointer;">
     <i class="fa-solid fa-moon"></i>
   </button>
 </header>
 
 <div class="container">
-  <main class="main-area">
-    <section class="card">
-      <h2 class="section-title"><i class="fa-solid fa-bullhorn" style="color: var(--accent);"></i> Aktuální Oznámení</h2>
-      
-      <div id="announcementList">
-        <!-- Zde jsou statické ukázky, které se dají nahradit API feedem -->
-        <div class="announcement-item">
-          <div style="font-size: 0.75rem; opacity: 0.6; margin-bottom: 5px;">5. DUBNA 2026</div>
-          <h3 style="margin-bottom: 10px;">Spuštění nového webu StormVoice!</h3>
-          <p>Dnes jsme oficiálně spustili náš nový web s real-time integrací Robloxu a Discordu. Sledujte nás pro další updaty.</p>
-        </div>
+  <main class="main-content">
+    <div class="card">
+      <div class="feed-header">
+        <div class="live-dot"></div>
+        <h2 style="font-family: 'Oxanium';">Live Oznámení</h2>
+      </div>
 
-        <div class="announcement-item">
-          <div style="font-size: 0.75rem; opacity: 0.6; margin-bottom: 5px;">3. DUBNA 2026</div>
-          <h3 style="margin-bottom: 10px;">Nábor do Admin Týmu</h3>
-          <p>Hledáme nové posily! Pokud máš zájem stát se součástí StormVoice týmu, podej si přihlášku na našem Discordu.</p>
+      <div id="announcements">
+        <div class="announcement-box">
+          <div style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 8px;">Dnes v 16:20</div>
+          <p>Právě probíhá synchronizace s kanálem <strong>#1433583582567338060</strong>. Všechna důležitá herní oznámení ze StormVoice se budou zobrazovat zde i na našem Discordu.</p>
+        </div>
+        
+        <div class="announcement-box" style="opacity: 0.7;">
+          <div style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 8px;">Včera</div>
+          <p>Nezapomeňte se připojit k našemu sobotnímu eventu na Robloxu! Více info v kanálu #events.</p>
         </div>
       </div>
-    </section>
+    </div>
   </main>
 
-  <aside class="discord-sidebar">
-    <div class="discord-card">
-      <div class="status-badge">
-        <div class="pulse"></div> Real-time Sync
-      </div>
-      <i class="fa-brands fa-discord" style="font-size: 3rem; margin-bottom: 15px;"></i>
-      <h3>Discord Komunita</h3>
-      <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.9;">
-        Online členů: <span id="discordCount">...</span>
-      </p>
-      
-      <!-- Live widget iframe (nahraď ID svým serverem pokud máš zapnutý widget) -->
-      <iframe src="https://discord.com/widget?id=537043716&theme=dark" width="100%" height="300" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts" style="margin-top: 20px; border-radius: 12px;"></iframe>
-
-      <a href="https://discord.gg/jtjfSgTbGF" target="_blank" class="btn-discord">VSTOUPIT NA SERVER</a>
+  <aside class="discord-widget-container">
+    <div class="widget-info">
+        <i class="fa-brands fa-discord" style="font-size: 2.5rem; margin-bottom: 10px;"></i>
+        <h3 style="font-family: 'Oxanium';">StormVoice Discord</h3>
+        <p style="font-size: 0.8rem; opacity: 0.9;">Právě online: <span id="onlineCount">--</span></p>
     </div>
+    
+    <!-- DISCORD WIDGET - Propojeno s tvým ID kanálu -->
+    <iframe src="https://discord.com/widget?id=1433583582567338060&theme=dark" width="100%" height="450" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+
+    <a href="https://discord.gg/jtjfSgTbGF" target="_blank" class="btn-join">PŘIPOJIT SE K NÁM</a>
   </aside>
 </div>
 
-<footer>
-  <small>© <span id="year"></span> StormVoice CZ/SK — All rights reserved</small>
-</footer>
-
 <script>
-/* REALTIME DISCORD DATA */
-async function fetchDiscordStatus() {
+  // Dynamické datum v patičce
+  const yearSpan = document.createElement('span');
+  document.body.appendChild(yearSpan); // Jen pro funkčnost skriptu
+  
+  // Real-time synchronizace stavu
+  async function updateStatus() {
     try {
-        // Používáme veřejné widget API (vyžaduje zapnutý widget v nastavení serveru)
-        const response = await fetch('https://discord.com/api/guilds/123456789/widget.json'); // Nahraď ID tvým Guild ID
-        const data = await response.json();
-        document.getElementById('discordCount').textContent = data.presence_count || "Online";
-    } catch (e) {
-        document.getElementById('discordCount').textContent = "Live";
+        const res = await fetch('https://discord.com/api/guilds/1433583582567338060/widget.json');
+        const data = await res.json();
+        document.getElementById('onlineCount').textContent = data.presence_count || "Aktivní";
+    } catch(e) {
+        document.getElementById('onlineCount').textContent = "Live";
     }
-}
+  }
 
-/* UI LOGIKA */
-const tBtn = document.getElementById('themeToggle');
-tBtn.onclick = () => {
+  // Theme Toggle
+  const tBtn = document.getElementById('themeToggle');
+  tBtn.onclick = () => {
     document.body.classList.toggle('dark');
     const isDark = document.body.classList.contains('dark');
     tBtn.innerHTML = isDark ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
     localStorage.setItem('sv_theme', isDark ? 'dark' : 'light');
-};
+  };
 
-document.getElementById('year').textContent = new Date().getFullYear();
-if(localStorage.getItem('sv_theme') === 'dark') {
+  // Inicializace
+  if(localStorage.getItem('sv_theme') === 'dark') {
     document.body.classList.add('dark');
     tBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
-}
-
-fetchDiscordStatus();
-// Auto refresh každých 60 sekund
-setInterval(fetchDiscordStatus, 60000);
+  }
+  
+  updateStatus();
+  setInterval(updateStatus, 30000); // Aktualizace každých 30 sekund
 </script>
 
 </body>
